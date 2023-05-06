@@ -41,6 +41,7 @@
 
             <Switch
                 style="@style/Main.Switch"
+                android:checked="@{vm.isSwitchImmediate()}"
                 android:text="@string/switch_immediate"
                 android:background="@color/main_level1"/>
 

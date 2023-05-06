@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.b3lon9.easyflash"
-        minSdk 17
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"

@@ -1,5 +1,6 @@
 package com.b3lon9.easyflash
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,6 +15,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.vm = MainViewModel(this)    //ViewModelProvider(this, ViewModelFactory(this))[(MainViewModel::class.java)]
+        binding.vm = MainViewModel(this, getPreferences(Context.MODE_PRIVATE))    //ViewModelProvider(this, ViewModelFactory(this))[(MainViewModel::class.java)]
     }
 }
