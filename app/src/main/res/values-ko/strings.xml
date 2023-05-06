@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">쉬운조명</string>
+
+    <string name="switch_immediate">즉시켜짐</string>
+    <string name="switch_screen">전체조명</string>
+    <string name="switch_lock">화면잠금</string>
+</resources>

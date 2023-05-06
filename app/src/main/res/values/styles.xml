@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Main">
+
+    </style>
+
+    <style name="Main.Switch">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main_level4</item>
+        <item name="android:switchMinWidth">@dimen/switch_width</item>
+    </style>
+</resources>
