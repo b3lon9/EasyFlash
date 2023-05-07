@@ -6,8 +6,10 @@ import android.content.SharedPreferences.Editor
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.view.View
+import android.view.WindowManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.nlog.NLog
 
@@ -79,6 +81,17 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             val cameraId = cameraIdList.first()
             setTorchMode(cameraId, true)
         }
+
+        if (isSwitchScreen.value == true) {
+            (context as MainActivity).apply{
+                window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+                // max bright
+                val layoutParams = window.attributes
+                layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
+                window.attributes = layoutParams
+            }
+        }
     }
 
     private fun flashOff() {
@@ -86,6 +99,17 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         cameraManager.apply {
             val cameraId = cameraIdList.first()
             setTorchMode(cameraId, false)
+        }
+
+        if (isSwitchScreen.value == true) {
+            (context as MainActivity).apply{
+                window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+                // max bright
+                val layoutParams = window.attributes
+                layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
+                window.attributes = layoutParams
+            }
         }
     }
 }
