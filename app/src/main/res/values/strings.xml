@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">EasyFlash</string>
 
+    <string name="toggle_text_on">Flash ON</string>
+    <string name="toggle_text_off">Flash OFF</string>
+
     <string name="switch_immediate">Immediate</string>
     <string name="switch_screen">Screen</string>
     <string name="switch_lock">Lock</string>
