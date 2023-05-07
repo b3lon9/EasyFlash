@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_ripple_effect"
+            android:layout_margin="12dp"
             android:text="▲"
             android:textColor="@color/black"
             android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}"
