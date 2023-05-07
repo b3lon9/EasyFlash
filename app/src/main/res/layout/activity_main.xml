@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.b3lon9.easyflash.viewmodels.MainViewModel" />
@@ -25,7 +28,7 @@
             android:id="@+id/setting_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@drawable/button_ripple_effect"
             android:text="▲"
             android:textColor="@color/black"
             android:textSize="24sp" />
@@ -40,20 +43,28 @@
             tools:ignore="UseSwitchCompatOrMaterialXml">
 
             <Switch
+                android:id="@+id/switch_immediate"
                 style="@style/Main.Switch"
+                android:background="@color/main_level1"
                 android:checked="@{vm.isSwitchImmediate()}"
-                android:text="@string/switch_immediate"
-                android:background="@color/main_level1"/>
+                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                android:text="@string/switch_immediate" />
 
             <Switch
+                android:id="@+id/switch_screen"
                 style="@style/Main.Switch"
-                android:text="@string/switch_screen"
-                android:background="@color/main_level2"/>
+                android:background="@color/main_level2"
+                android:checked="@{vm.isSwitchScreen()}"
+                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                android:text="@string/switch_screen" />
 
             <Switch
+                android:id="@+id/switch_lock"
                 style="@style/Main.Switch"
-                android:text="@string/switch_lock"
-                android:background="@color/main_level3"/>
+                android:background="@color/main_level3"
+                android:checked="@{vm.isSwitchLock()}"
+                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                android:text="@string/switch_lock" />
 
         </LinearLayout>
     </LinearLayout>
