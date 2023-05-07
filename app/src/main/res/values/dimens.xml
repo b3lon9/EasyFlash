@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="switch_width">52dp</dimen>
+    <dimen name="switch_width">46dp</dimen>
+    <dimen name="switch_track_radius">16dp</dimen>
+    <dimen name="switch_track_height">14dp</dimen>
+    <dimen name="switch_thumb_size">24dp</dimen>
+
+    <dimen name="switch_thumb_padding">-10dp</dimen>
 </resources>

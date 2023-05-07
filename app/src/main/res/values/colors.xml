@@ -12,10 +12,31 @@
     <color name="main_level2">#9DC08B</color>
     <color name="main_level3">#609966</color>
     <color name="main_level4">#40513B</color>
+
+    <color name="fun_level1">#D0C9C0</color>
+    <color name="fun_level2">#EFEAD8</color>
+    <color name="fun_level3">#6D8B74</color>
+    <color name="fun_level4">#5F7161</color>
+
+    <color name="switch_track_off">#CFD2CF</color>
+    <color name="switch_thumb_off">#F5EDDC</color>
+    <color name="switch_track_on">#FAD4D4</color>
+    <color name="switch_thumb_on">#FD5D5D</color>
+
     <!--
 #EDF1D6
 #9DC08B
 #609966
 #40513B
+
+#5F7161
+#6D8B74
+#EFEAD8
+#D0C9C0
+
+#FD5D5D
+#FF8080
+#FFF7BC
+#C0EDA6
     -->
 </resources>

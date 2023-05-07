@@ -49,7 +49,9 @@
                 android:background="@color/main_level1"
                 android:checked="@{vm.isSwitchImmediate()}"
                 android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
-                android:text="@string/switch_immediate" />
+                android:textOn="on"
+                android:textOff="off"
+                android:text="@string/switch_immediate"  />
 
             <Switch
                 android:id="@+id/switch_screen"
