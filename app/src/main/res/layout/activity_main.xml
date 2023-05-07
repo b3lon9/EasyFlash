@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.9"
+            android:checked="@={vm.isToggleChecked}"
             android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}" />
 
         <Button
