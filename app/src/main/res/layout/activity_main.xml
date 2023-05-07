@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.9"
+            android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
             android:checked="@={vm.isToggleChecked}"
             android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}" />
 
@@ -32,6 +33,7 @@
             android:background="@drawable/button_ripple_effect"
             android:text="▲"
             android:textColor="@color/black"
+            android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}"
             android:textSize="24sp" />
 
         <LinearLayout
