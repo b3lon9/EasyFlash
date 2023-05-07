@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">쉬운조명</string>
+    <string name="app_name">간단조명</string>
 
     <string name="toggle_text_on">조명 켜짐\n\n화면을 터치해주세요</string>
     <string name="toggle_text_on_lock">조명 켜짐(잠금)\n\n화면을 터치해주세요</string>

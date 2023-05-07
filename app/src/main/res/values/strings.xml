@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EasyFlash</string>
+    <string name="app_name">SimpleFlash</string>
 
     <string name="toggle_text_on">Flash ON\n\nTouch Screen</string>
     <string name="toggle_text_on_lock">Flash ON(LOCK)\n\nTouch Screen</string>
