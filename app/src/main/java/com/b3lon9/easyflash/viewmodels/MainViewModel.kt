@@ -43,6 +43,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     }
 
     fun onCheckedChanged(isChecked: Boolean) {
+        NLog.d("...클릭이 되긴 하나?")
         isToggleChecked.value = isChecked
         try {
             if (isChecked) flashOn() else flashOff()

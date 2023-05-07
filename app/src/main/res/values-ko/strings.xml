@@ -2,6 +2,7 @@
     <string name="app_name">쉬운조명</string>
 
     <string name="toggle_text_on">조명 켜짐</string>
+    <string name="toggle_text_on_lock">조명 켜짐(잠금)</string>
     <string name="toggle_text_off">조명 꺼짐</string>
 
     <string name="switch_immediate">즉시켜짐</string>

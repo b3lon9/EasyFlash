@@ -2,6 +2,7 @@
     <string name="app_name">EasyFlash</string>
 
     <string name="toggle_text_on">Flash ON</string>
+    <string name="toggle_text_on_lock">Flash ON(LOCK)</string>
     <string name="toggle_text_off">Flash OFF</string>
 
     <string name="switch_immediate">Immediate</string>
