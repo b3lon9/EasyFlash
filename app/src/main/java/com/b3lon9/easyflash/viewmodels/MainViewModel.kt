@@ -78,14 +78,14 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     private fun flashOn() {
         // API23(Marshmallow) check
-        cameraManager.apply {
-            val cameraId = cameraIdList.first()
-            try {
+        try {
+            cameraManager.apply {
+                val cameraId = cameraIdList.first()
                 setTorchMode(cameraId, true)
-            } catch (e:Exception) {
-                Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
-                return
             }
+        } catch (e:Exception) {
+            Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
+            return
         }
 
         if (isSwitchScreen.value == true) {
@@ -102,14 +102,14 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     private fun flashOff() {
         // API23(Marshmallow) check
-        cameraManager.apply {
-            val cameraId = cameraIdList.first()
-            try {
-                setTorchMode(cameraId, true)
-            } catch (e:Exception) {
-                Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
-                return
+        try {
+            cameraManager.apply {
+                val cameraId = cameraIdList.first()
+                setTorchMode(cameraId, false)
             }
+        } catch (e:Exception) {
+            Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
+            return
         }
 
         if (isSwitchScreen.value == true) {
