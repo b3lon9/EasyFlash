@@ -8,4 +8,6 @@
     <string name="switch_immediate">Immediate</string>
     <string name="switch_screen">Screen</string>
     <string name="switch_lock">Lock</string>
+
+    <string name="torch_toast">Flash unavailable device</string>
 </resources>

@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
@@ -79,7 +80,12 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         // API23(Marshmallow) check
         cameraManager.apply {
             val cameraId = cameraIdList.first()
-            setTorchMode(cameraId, true)
+            try {
+                setTorchMode(cameraId, true)
+            } catch (e:Exception) {
+                Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
+                return
+            }
         }
 
         if (isSwitchScreen.value == true) {
@@ -98,7 +104,12 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         // API23(Marshmallow) check
         cameraManager.apply {
             val cameraId = cameraIdList.first()
-            setTorchMode(cameraId, false)
+            try {
+                setTorchMode(cameraId, true)
+            } catch (e:Exception) {
+                Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
+                return
+            }
         }
 
         if (isSwitchScreen.value == true) {
