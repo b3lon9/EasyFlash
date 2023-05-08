@@ -122,3 +122,5 @@ androidTest/
 mipmap*/
 test/
 *.pro
+
+*.json
