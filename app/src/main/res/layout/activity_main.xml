@@ -22,14 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.9"
-            android:textOn="@{vm.isSwitchLock ? @string/toggle_text_on_lock : @string/toggle_text_on}"
-            android:textOff="@string/toggle_text_off"
-            android:textSize="@dimen/toggle_text_size"
-            android:textAllCaps="false"
-            android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
             android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
             android:checked="@={vm.isToggleChecked}"
-            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}"/>
+            android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
+            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}"
+            android:textAllCaps="false"
+            android:textOff="@string/toggle_text_off"
+            android:textOn="@{vm.isSwitchLock ? @string/toggle_text_on_lock : @string/toggle_text_on}"
+            android:textSize="@dimen/toggle_text_size" />
 
         <Button
             android:id="@+id/setting_button"
