@@ -22,9 +22,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.math.abs
-import kotlin.reflect.typeOf
 
-class MainActivity : AppCompatActivity(), View.OnTouchListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val context:Context = this
     private var firstPoint:Int = 0
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
         admob()
 
         firebaseRealtimeDatabase()
-        binding.toggleButton.setOnTouchListener(this)
+        binding.toggleView.setOnTouchListener(touchListener)
     }
 
     override fun onResume() {
@@ -97,34 +96,40 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener {
         })
     }
 
-    override fun onTouch(view: View?, event: MotionEvent?): Boolean {
+    private val touchListener = object:View.OnTouchListener {
+        override fun onTouch(view: View?, event: MotionEvent?): Boolean {
+            when (event!!.action) {
 
-        when (event?.action) {
-            MotionEvent.ACTION_DOWN -> {
-                firstPoint = (event.y).toInt()
-            }
-            MotionEvent.ACTION_MOVE -> {
-                abs(firstPoint - (event.y).toInt()).let {
-                    val level = when(it) {
-                        in 0.. 100 -> Constant.Level.FLASH_LEVEL1
-                        in 101.. 200 -> Constant.Level.FLASH_LEVEL2
-                        in 201.. 300 -> Constant.Level.FLASH_LEVEL3
-                        in 301.. 400 -> Constant.Level.FLASH_LEVEL4
-                        else -> Constant.Level.FLASH_LEVEL5
+                MotionEvent.ACTION_DOWN -> {
+                    firstPoint = (event.y).toInt()
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    abs(firstPoint - (event.y).toInt()).let {
+                        val level = when(it) {
+                            in 0.. 100 -> Constant.Level.FLASH_LEVEL1
+                            in 101.. 200 -> Constant.Level.FLASH_LEVEL2
+                            in 201.. 300 -> Constant.Level.FLASH_LEVEL3
+                            in 301.. 400 -> Constant.Level.FLASH_LEVEL4
+                            else -> Constant.Level.FLASH_LEVEL5
+                        }
+
+                        flashLevel(level, firstPoint < event.y)
                     }
+                }
 
-                    flashLevel(level, firstPoint < event.y)
+                MotionEvent.ACTION_UP -> {
+                    if (abs(firstPoint - (event.y).toInt()) <= 10) {
+                        /*!view!!.isSelected
+                        binding.vm.onCheckedChanged()*/
+                    }
                 }
             }
-            MotionEvent.ACTION_UP -> {
-                if (abs(firstPoint - (event.y).toInt()) <= 10) {
-                    binding.toggleButton.isChecked = !binding.vm!!.isToggleChecked.value!!
-                }
-            }
+            return true
         }
-        return true
     }
-    private fun flashLevel(level:Int, up:Boolean) {
 
+    private fun flashLevel(level:Int, up:Boolean) {
+            binding.brightImg.setImageLevel(level)
     }
 }
