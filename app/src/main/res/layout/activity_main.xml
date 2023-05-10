@@ -23,12 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.9"
-            android:weightSum="4"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/toggle_screen_selector">
+            android:background="@drawable/toggle_screen_selector"
+            tools:ignore="NestedWeights" >
 
             <ImageView
                 android:id="@+id/bright_img"
@@ -37,12 +37,12 @@
                 android:layout_weight="1"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/bright_level"
-                android:visibility="@{vm.isToggleChecked() ? View.GONE : View.VISIBLE}"/>
+                android:visibility="@{vm.isToggleChecked() ? View.GONE : View.VISIBLE}" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:text="@string/toggle_text_on"
                 android:gravity="center"
                 android:textSize="@dimen/toggle_text_size" />
@@ -51,9 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="테스트"
-                android:textSize="@dimen/toggle_text_size"
-                android:gravity="center" />
+                android:text="@string/toggle_text_guide"
+                android:textSize="@dimen/toggle_text_guide_size"
+                android:gravity="center_horizontal" />
 
         </LinearLayout>
 

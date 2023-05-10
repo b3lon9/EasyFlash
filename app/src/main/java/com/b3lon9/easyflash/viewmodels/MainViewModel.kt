@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
-import android.media.MediaPlayer
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -44,10 +43,14 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         }
     }
 
-    fun onCheckedChanged(isChecked: Boolean) {
+    fun onCheckedChanged(view:View?) {
         beepOn()
 
+        val isChecked:Boolean = !view!!.isSelected
+
         isToggleChecked.value = isChecked
+        view.isSelected = isChecked
+
         try {
             if (isChecked) flashOn() else flashOff()
         } finally {

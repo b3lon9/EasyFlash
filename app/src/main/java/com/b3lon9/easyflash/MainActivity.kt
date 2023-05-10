@@ -120,8 +120,7 @@ class MainActivity : AppCompatActivity() {
 
                 MotionEvent.ACTION_UP -> {
                     if (abs(firstPoint - (event.y).toInt()) <= 10) {
-                        /*!view!!.isSelected
-                        binding.vm.onCheckedChanged()*/
+                        binding.vm!!.onCheckedChanged(view)
                     }
                 }
             }

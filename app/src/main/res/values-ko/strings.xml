@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">간단조명</string>
 
-    <string name="toggle_text_on">조명 켜짐\n\n화면을 터치해주세요</string>
-    <string name="toggle_text_on_lock">조명 켜짐(잠금)</string>
-    <string name="toggle_text_off">조명 꺼짐\n\n화면을 터치해주세요</string>
+    <string name="toggle_text_on">켜짐</string>
+    <string name="toggle_text_on_lock">켜짐(잠금)</string>
+    <string name="toggle_text_off">꺼짐</string>
+    <string name="toggle_text_guide">화면을 터치해주세요</string>
 
     <string name="switch_immediate">즉시켜짐</string>
-    <string name="switch_screen">전체조명</string>
+    <string name="switch_screen">앞뒤조명</string>
     <string name="switch_lock">화면잠금</string>
 
     <string name="torch_toast">조명 기능을 사용할 수 없는 디바이스입니다</string>
