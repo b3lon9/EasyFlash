@@ -3,8 +3,9 @@ package com.b3lon9.easyflash.viewmodels
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -12,10 +13,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
-import com.b3lon9.nlog.NLog
 
 class MainViewModel(private val context: Context, private val pref: SharedPreferences) :  ViewModel() {
     private val cameraManager: CameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+    private val audioManager:AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private val editor: Editor = pref.edit()
 
     val isToggleChecked      = MutableLiveData(false)
@@ -44,6 +45,8 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     }
 
     fun onCheckedChanged(isChecked: Boolean) {
+        beepOn()
+
         isToggleChecked.value = isChecked
         try {
             if (isChecked) flashOn() else flashOff()
@@ -122,5 +125,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 window.attributes = layoutParams
             }
         }
+    }
+
+    private fun beepOn() {
+        audioManager?.playSoundEffect(AudioManager.FX_KEY_CLICK)
     }
 }
