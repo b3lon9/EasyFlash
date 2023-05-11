@@ -28,6 +28,8 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
+    private lateinit var vm:MainViewModel
+
     private val context:Context = this
     private var firstPoint:Int = 0
 
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         val factory = ViewModelFactory(context, getPreferences(Context.MODE_PRIVATE))
-        val vm = ViewModelProvider(this, factory)[MainViewModel::class.java]
+        vm = ViewModelProvider(this, factory)[MainViewModel::class.java]
         binding.vm = vm
 
         admob()
@@ -53,12 +55,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.vm?.resume()
+        vm.resume()
     }
 
     override fun onPause() {
         super.onPause()
-        binding.vm?.pause()
+        vm.pause()
     }
 
     private fun admob() {
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                NLog.d("...error : ${error.toException().message}")
+                NLog.d("error msg : ${error.toException().message}")
             }
         })
     }
@@ -129,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
                 MotionEvent.ACTION_UP -> {
                     if (abs(firstPoint - (event.y).toInt()) <= 10) {
-                        binding.vm!!.onCheckedChanged(view)
+                        vm.onCheckedChanged(view)
                     }
                 }
             }
