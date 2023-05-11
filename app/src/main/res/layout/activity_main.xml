@@ -38,7 +38,8 @@
                 android:layout_weight="1"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/bright_level"
-                android:visibility="@{vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE}" />
+                android:visibility="gone"/>
+            <!--android:visibility="@{vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE}"-->
 
             <LinearLayout
                 android:layout_width="match_parent"
