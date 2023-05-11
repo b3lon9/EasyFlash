@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/toggle_text_guide"
+                android:text="@{vm.isToggleChecked? (vm.isSwitchLock ? @string/toggle_text_guide_lock : @string/toggle_text_guide):@string/toggle_text_guide}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/toggle_text_guide_size"
                 android:gravity="center_horizontal" />

@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
+import com.b3lon9.easyflash.constant.Constant
 
 class MainViewModel(private val context: Context, private val pref: SharedPreferences) :  ViewModel() {
     private val cameraManager: CameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
@@ -43,13 +44,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         }
     }
 
-    fun onCheckedChanged(view:View?) {
+    fun onCheckedChanged(isChecked:Boolean) {
         beepOn()
-
-        val isChecked:Boolean = !view!!.isSelected
-
         isToggleChecked.value = isChecked
-        view.isSelected = isChecked
 
         try {
             if (isChecked) flashOn() else flashOff()

@@ -10,4 +10,10 @@ class Constant {
         const val FLASH_MIN = FLASH_LEVEL1
         const val FLASH_MAX = FLASH_LEVEL5
     }
+
+    enum class Direct {
+        NORMAL,
+        UP,
+        DOWN,
+    }
 }
