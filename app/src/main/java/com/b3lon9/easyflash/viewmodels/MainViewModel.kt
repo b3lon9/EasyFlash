@@ -24,6 +24,17 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
+    var firstY = -1
+    var curLevel = Constant.Level.FLASH_LEVEL1
+    var direct = Constant.Direct.NORMAL
+
+    var flagChange = false
+    var flagLevel1 = false
+    var flagLevel2 = false
+    var flagLevel3 = false
+    var flagLevel4 = false
+    var flagLevel5 = false
+
     init {
         isSwitchImmediate.value = pref.getBoolean(context.getString(R.string.switch_immediate), false)
         isSwitchScreen.value = pref.getBoolean(context.getString(R.string.switch_screen), false)
@@ -42,6 +53,15 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             isToggleChecked.value = false
             flashOff()
         }
+    }
+
+    fun clearFlag() {
+        flagChange = false
+        flagLevel1 = false
+        flagLevel2 = false
+        flagLevel3 = false
+        flagLevel4 = false
+        flagLevel5 = false
     }
 
     fun onCheckedChanged(isChecked:Boolean) {

@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     private val context:Context = this
 
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,142 +106,122 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    var firstY = -1
-    var curLevel = 1
-    var direct = Constant.Direct.NORMAL
-
-    var flagChange = false
-    var flagLevel1 = false
-    var flagLevel2 = false
-    var flagLevel3 = false
-    var flagLevel4 = false
-    var flagLevel5 = false
-
     @SuppressLint("ClickableViewAccessibility")
     private val touchListener = View.OnTouchListener { view, event ->
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
-                firstY = (event.y).toInt()
+                vm.firstY = (event.y).toInt()
             }
 
             MotionEvent.ACTION_MOVE -> {
-                (firstY - (event.y).toInt()).let {
+                (vm.firstY - (event.y).toInt()).let {
                     if (it > 0) {
                         // up scroll
-                        if (direct == Constant.Direct.UP) {
+                        if (vm.direct == Constant.Direct.UP) {
                             when(abs(it)) {
                                 in 0..9 -> {}
                                 in 10..100 -> {
-                                    if (!flagLevel1) {
-                                        flagLevel1 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel1) {
+                                        vm.flagLevel1 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 101..200 -> {
-                                    if (!flagLevel2) {
-                                        flagLevel2 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel2) {
+                                        vm.flagLevel2 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 201..300 -> {
-                                    if (!flagLevel3) {
-                                        flagLevel3 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel3) {
+                                        vm.flagLevel3 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 301..400 -> {
-                                    if (!flagLevel4) {
-                                        flagLevel4 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel4) {
+                                        vm.flagLevel4 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 else -> {
-                                    if (!flagLevel5) {
-                                        flagLevel5 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel5) {
+                                        vm.flagLevel5 = true
+                                        vm.flagChange = true
                                     }
                                 }
                             }
 
-                            if (flagChange && curLevel in 1..4) {
-                                curLevel += 1
-                                flagChange = false
-                                binding.brightImg.setImageLevel(curLevel)
+                            if (vm.flagChange && vm.curLevel in 1..4) {
+                                vm.curLevel += 1
+                                vm.flagChange = false
+                                binding.brightImg.setImageLevel(vm.curLevel)
                             }
 
                         } else {
                             // before Direct.DOWN
-                            clearFlag()
+                            vm.clearFlag()
                         }
 
-                        direct = Constant.Direct.UP
+                        vm.direct = Constant.Direct.UP
                     } else {
                         // down scroll
-                        if (direct == Constant.Direct.DOWN) {
+                        if (vm.direct == Constant.Direct.DOWN) {
                             when(abs(it)) {
                                 in 0..9 -> {}
                                 in 10..100 -> {
-                                    if (!flagLevel1) {
-                                        flagLevel1 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel1) {
+                                        vm.flagLevel1 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 101..200 -> {
-                                    if (!flagLevel2) {
-                                        flagLevel2 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel2) {
+                                        vm.flagLevel2 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 201..300 -> {
-                                    if (!flagLevel3) {
-                                        flagLevel3 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel3) {
+                                        vm.flagLevel3 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 in 301..400 -> {
-                                    if (!flagLevel4) {
-                                        flagLevel4 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel4) {
+                                        vm.flagLevel4 = true
+                                        vm.flagChange = true
                                     }
                                 }
                                 else -> {
-                                    if (!flagLevel5) {
-                                        flagLevel5 = true
-                                        flagChange = true
+                                    if (!vm.flagLevel5) {
+                                        vm.flagLevel5 = true
+                                        vm.flagChange = true
                                     }
                                 }
                             }
 
-                            if (flagChange && curLevel in 2 .. 5) {
-                                curLevel -= 1
-                                flagChange = false
-                                binding.brightImg.setImageLevel(curLevel)
+                            if (vm.flagChange && vm.curLevel in 2 .. 5) {
+                                vm.curLevel -= 1
+                                vm.flagChange = false
+                                binding.brightImg.setImageLevel(vm.curLevel)
                             }
                         } else {
                             // before Direct.UP
-                            clearFlag()
+                            vm.clearFlag()
                         }
 
-                        direct = Constant.Direct.DOWN
+                        vm.direct = Constant.Direct.DOWN
                     }
                 }
             }
 
             MotionEvent.ACTION_UP -> {
-                if (abs(firstY - (event.y).toInt()) < 10) vm.onCheckedChanged(!view!!.isSelected)
-                direct = Constant.Direct.NORMAL
-                clearFlag()
+                if (abs(vm.firstY - (event.y).toInt()) < 10) vm.onCheckedChanged(!view!!.isSelected)
+                vm.direct = Constant.Direct.NORMAL
+                vm.clearFlag()
             }
         } // when end
         true
-    }
-
-    private fun clearFlag() {
-        flagChange = false
-        flagLevel1 = false
-        flagLevel2 = false
-        flagLevel3 = false
-        flagLevel4 = false
-        flagLevel5 = false
     }
 }
