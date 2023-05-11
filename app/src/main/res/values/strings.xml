@@ -2,7 +2,7 @@
     <string name="app_name">SimpleFlash</string>
 
     <string name="toggle_text_on">ON</string>
-    <string name="toggle_text_on_lock">ON\n(LOCK)</string>
+    <string name="toggle_text_on_lock">(LOCK)</string>
     <string name="toggle_text_off">OFF</string>
     <string name="toggle_text_guide">Touch Screen</string>
 
