@@ -2,7 +2,7 @@
     <string name="app_name">간단조명</string>
 
     <string name="toggle_text_on">켜짐</string>
-    <string name="toggle_text_on_lock">켜짐(잠금)</string>
+    <string name="toggle_text_on_lock">켜짐\n(잠금)</string>
     <string name="toggle_text_off">꺼짐</string>
     <string name="toggle_text_guide">화면을 터치해주세요</string>
 

@@ -10,9 +10,12 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.b3lon9.easyflash.constant.Constant
 import com.b3lon9.easyflash.databinding.ActivityMainBinding
 import com.b3lon9.easyflash.viewmodels.MainViewModel
+import com.b3lon9.easyflash.viewmodels.ViewModelFactory
 import com.b3lon9.nlog.NLog
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -34,12 +37,18 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        binding.vm = MainViewModel(context, getPreferences(Context.MODE_PRIVATE))    //ViewModelProvider(this, ViewModelFactory(this))[(MainViewModel::class.java)]
+        val factory = ViewModelFactory(context, getPreferences(Context.MODE_PRIVATE))
+        val vm = ViewModelProvider(this, factory)[MainViewModel::class.java]
+        binding.vm = vm
 
         admob()
 
         firebaseRealtimeDatabase()
+
         binding.toggleView.setOnTouchListener(touchListener)
+        vm.isToggleChecked.observe(this, Observer{
+            binding.toggleView.isSelected = it
+        })
     }
 
     override fun onResume() {

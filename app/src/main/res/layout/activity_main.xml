@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -27,7 +26,8 @@
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/toggle_screen_selector"
+            android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
+            android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
             tools:ignore="NestedWeights" >
 
             <ImageView
@@ -37,14 +37,15 @@
                 android:layout_weight="1"
                 android:layout_marginTop="30dp"
                 android:src="@drawable/bright_level"
-                android:visibility="@{vm.isToggleChecked() ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE}" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/toggle_text_on"
                 android:gravity="center"
+                android:text="@{vm.isToggleChecked? (vm.isSwitchLock ? @string/toggle_text_on_lock : @string/toggle_text_on):@string/toggle_text_off}"
+                android:textStyle="bold"
                 android:textSize="@dimen/toggle_text_size" />
             
             <TextView
