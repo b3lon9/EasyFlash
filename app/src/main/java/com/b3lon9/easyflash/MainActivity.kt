@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         vm.isToggleChecked.observe(this, Observer{
             binding.toggleView.isSelected = it
         })
+
+        binding.closeBtn.setOnClickListener{
+            finish()
+        }
     }
 
     override fun onResume() {

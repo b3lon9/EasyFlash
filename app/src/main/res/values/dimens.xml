@@ -3,6 +3,9 @@
     <dimen name="toggle_text_size">60sp</dimen>
     <dimen name="toggle_text_guide_size">36sp</dimen>
 
+    <dimen name="close_btn_size">48dp</dimen>
+    <dimen name="close_btn_margin">24dp</dimen>
+
     <dimen name="switch_width">46dp</dimen>
     <dimen name="switch_track_radius">16dp</dimen>
     <dimen name="switch_track_height">14dp</dimen>

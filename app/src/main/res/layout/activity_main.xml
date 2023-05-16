@@ -31,6 +31,16 @@
             android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
             tools:ignore="NestedWeights" >
 
+            <Button
+                android:id="@+id/close_btn"
+                android:layout_width="@dimen/close_btn_size"
+                android:layout_height="@dimen/close_btn_size"
+                android:layout_marginTop="@dimen/close_btn_margin"
+                android:layout_marginRight="@dimen/close_btn_margin"
+                android:layout_gravity="end"
+                android:background="@drawable/close_selector"
+                android:visibility="@{vm.isToggleChecked? (vm.isSwitchScreen? View.GONE : View.VISIBLE) : View.VISIBLE}"/>
+
             <ImageView
                 android:id="@+id/bright_img"
                 android:layout_width="wrap_content"
