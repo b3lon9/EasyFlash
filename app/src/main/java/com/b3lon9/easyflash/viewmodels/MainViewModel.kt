@@ -129,6 +129,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             cameraManager.apply {
                 // val cameraId = cameraIdList.first()
                 setTorchMode(cameraId, true)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) turnOnTorchWithStrengthLevel(cameraId, curLevel)
             }
         } catch (e:Exception) {
             Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
@@ -173,7 +174,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     fun flashLevel(level:Int) {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (isToggleChecked.value == true && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 cameraManager.apply {
                     turnOnTorchWithStrengthLevel(cameraId, level)
                 }
