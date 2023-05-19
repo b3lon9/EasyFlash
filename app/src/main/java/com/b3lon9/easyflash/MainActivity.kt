@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         binding.closeBtn.setOnClickListener{
             finish()
         }
+
+        if (BuildConfig.DEBUG) {
+            binding.banner.visibility = View.GONE
+        }
     }
 
     override fun onResume() {
@@ -112,6 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private val touchListener = View.OnTouchListener { view, event ->
+        val offsetLevel = 1
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 vm.firstY = (event.y).toInt()
@@ -157,9 +162,11 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             if (vm.flagChange && vm.curLevel in 1..4) {
-                                vm.curLevel += 1
+                                vm.curLevel += offsetLevel
                                 vm.flagChange = false
                                 binding.brightImg.setImageLevel(vm.curLevel)
+
+                                vm.flashLevel(vm.curLevel)
                             }
 
                         } else {
@@ -206,9 +213,11 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             if (vm.flagChange && vm.curLevel in 2 .. 5) {
-                                vm.curLevel -= 1
+                                vm.curLevel -= offsetLevel
                                 vm.flagChange = false
                                 binding.brightImg.setImageLevel(vm.curLevel)
+
+                                vm.flashLevel(vm.curLevel)
                             }
                         } else {
                             // before Direct.UP

@@ -12,4 +12,5 @@
     <string name="switch_lock">Lock</string>
 
     <string name="torch_toast">Flash unavailable device</string>
+    <string name="torch_level">FlashLevel</string>
 </resources>

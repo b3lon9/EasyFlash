@@ -3,21 +3,28 @@ package com.b3lon9.easyflash.viewmodels
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
+import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
+import com.b3lon9.nlog.NLog
 
 class MainViewModel(private val context: Context, private val pref: SharedPreferences) :  ViewModel() {
     private val cameraManager: CameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private val audioManager:AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private val editor: Editor = pref.edit()
+
+    private lateinit var cameraId:String
+    var isAPI33Higher:Boolean = false
 
     val isToggleChecked      = MutableLiveData(false)
     val isSwitchImmediate    = MutableLiveData(false)
@@ -25,7 +32,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchLock         = MutableLiveData(false)
 
     var firstY = -1
-    var curLevel = Constant.Level.FLASH_LEVEL1
+    var curLevel = pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1)
     var direct = Constant.Direct.NORMAL
 
     var flagChange = false
@@ -39,6 +46,23 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         isSwitchImmediate.value = pref.getBoolean(context.getString(R.string.switch_immediate), false)
         isSwitchScreen.value = pref.getBoolean(context.getString(R.string.switch_screen), false)
         isSwitchLock.value = pref.getBoolean(context.getString(R.string.switch_lock), false)
+
+        try {
+            val cameraIds = cameraManager.cameraIdList
+
+            for (id in cameraIds) {
+                val characteristics = cameraManager.getCameraCharacteristics(id)
+                val lensFacing = characteristics.get(CameraCharacteristics.LENS_FACING)
+                if (lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    cameraId = id
+                    break
+                }
+            }
+        } finally {
+
+        }
+
+        isAPI33Higher = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
     }
 
     fun resume() {
@@ -103,7 +127,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         // API23(Marshmallow) check
         try {
             cameraManager.apply {
-                val cameraId = cameraIdList.first()
+                // val cameraId = cameraIdList.first()
                 setTorchMode(cameraId, true)
             }
         } catch (e:Exception) {
@@ -127,7 +151,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         // API23(Marshmallow) check
         try {
             cameraManager.apply {
-                val cameraId = cameraIdList.first()
+                // val cameraId = cameraIdList.first()
                 setTorchMode(cameraId, false)
             }
         } catch (e:Exception) {
@@ -144,6 +168,23 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 layoutParams.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE
                 window.attributes = layoutParams
             }
+        }
+    }
+
+    fun flashLevel(level:Int) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                cameraManager.apply {
+                    turnOnTorchWithStrengthLevel(cameraId, level)
+                }
+                val key = context.resources.getString(R.string.torch_level)
+                editor.apply {
+                    putInt(key, level)
+                    apply()
+                }
+            }
+        } finally {
+
         }
     }
 
