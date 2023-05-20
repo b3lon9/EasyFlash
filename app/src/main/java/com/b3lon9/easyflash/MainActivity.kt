@@ -51,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             binding.toggleView.isSelected = it
         })
 
+        vm.curLevel.observe(this) {
+            binding.brightImg.setImageLevel(it)
+            vm.flashLevel(it)
+        }
+
         binding.closeBtn.setOnClickListener{
             finish()
         }
@@ -161,12 +166,12 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
-                            if (vm.flagChange && vm.curLevel in 1..4) {
-                                vm.curLevel += offsetLevel
+                            if (vm.flagChange && vm.curLevel.value in 1..4) {
+                                vm.curLevel.value = vm.curLevel.value!!.plus(offsetLevel)
                                 vm.flagChange = false
-                                binding.brightImg.setImageLevel(vm.curLevel)
+                                // binding.brightImg.setImageLevel(vm.curLevel)
 
-                                vm.flashLevel(vm.curLevel)
+                                //vm.flashLevel(vm.curLevel)
                             }
 
                         } else {
@@ -212,12 +217,9 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
-                            if (vm.flagChange && vm.curLevel in 2 .. 5) {
-                                vm.curLevel -= offsetLevel
+                            if (vm.flagChange && vm.curLevel.value in 2 .. 5) {
+                                vm.curLevel.value = vm.curLevel.value!!.minus(offsetLevel)
                                 vm.flagChange = false
-                                binding.brightImg.setImageLevel(vm.curLevel)
-
-                                vm.flashLevel(vm.curLevel)
                             }
                         } else {
                             // before Direct.UP

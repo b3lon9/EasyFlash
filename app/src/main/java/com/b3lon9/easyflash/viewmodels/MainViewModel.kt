@@ -1,5 +1,6 @@
 package com.b3lon9.easyflash.viewmodels
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
@@ -18,6 +19,7 @@ import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
 import com.b3lon9.nlog.NLog
 
+@SuppressLint("StaticFieldLeak")
 class MainViewModel(private val context: Context, private val pref: SharedPreferences) :  ViewModel() {
     private val cameraManager: CameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private val audioManager:AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -32,7 +34,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchLock         = MutableLiveData(false)
 
     var firstY = -1
-    var curLevel = pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1)
+    var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1))
     var direct = Constant.Direct.NORMAL
 
     var flagChange = false
@@ -129,7 +131,11 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             cameraManager.apply {
                 // val cameraId = cameraIdList.first()
                 setTorchMode(cameraId, true)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) turnOnTorchWithStrengthLevel(cameraId, curLevel)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) curLevel?.value?.let {
+                    turnOnTorchWithStrengthLevel(cameraId,
+                        it
+                    )
+                }
             }
         } catch (e:Exception) {
             Toast.makeText(context, context.resources.getString(R.string.torch_toast), Toast.LENGTH_SHORT).show()
@@ -178,14 +184,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 cameraManager.apply {
                     turnOnTorchWithStrengthLevel(cameraId, level)
                 }
-                val key = context.resources.getString(R.string.torch_level)
-                editor.apply {
-                    putInt(key, level)
-                    apply()
-                }
             }
         } finally {
-
+            val key = context.resources.getString(R.string.torch_level)
+            editor.apply {
+                putInt(key, level)
+                apply()
+            }
         }
     }
 
