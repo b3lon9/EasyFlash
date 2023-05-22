@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <import type="android.view.Gravity" />
 
         <variable
@@ -12,159 +14,179 @@
             type="com.b3lon9.easyflash.viewmodels.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        tools:context=".MainActivity">
 
         <LinearLayout
-            android:id="@+id/toggle_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
-            android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
-            tools:ignore="NestedWeights" >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/close_btn"
-                android:layout_width="@dimen/close_btn_size"
-                android:layout_height="@dimen/close_btn_size"
-                android:layout_marginTop="@dimen/close_btn_margin"
-                android:layout_marginRight="@dimen/close_btn_margin"
-                android:layout_gravity="end"
-                android:background="@drawable/close_selector"
-                android:visibility="@{vm.isToggleChecked? (vm.isSwitchScreen? View.GONE : View.VISIBLE) : View.VISIBLE}"/>
-
-            <ImageView
-                android:id="@+id/bright_img"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/bright_level"
-                android:visibility="@{vm.isAPI33Higher ? (vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE) : View.GONE}"/>
-            <!--android:visibility="@{vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE}"-->
 
             <LinearLayout
+                android:id="@+id/toggle_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
+                android:layout_weight="0.9"
+                android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
+                android:clickable="true"
+                android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/close_btn_margin"
+                    android:visibility="@{vm.isToggleChecked? (vm.isSwitchScreen? View.GONE : View.VISIBLE) : View.VISIBLE}" >
+                    <Button
+                        android:id="@+id/menu_btn"
+                        android:layout_width="@dimen/close_btn_size"
+                        android:layout_height="@dimen/close_btn_size"
+                        android:background="@drawable/menu_selector"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                    <Button
+                        android:id="@+id/close_btn"
+                        android:layout_width="@dimen/close_btn_size"
+                        android:layout_height="@dimen/close_btn_size"
+                        android:background="@drawable/close_selector"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/bright_img"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
+                    android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:gravity="@{vm.isToggleChecked ? (vm.isSwitchLock ? Gravity.CENTER|Gravity.BOTTOM : Gravity.CENTER) : Gravity.CENTER}"
-                    android:text="@{vm.isToggleChecked? @string/toggle_text_on:@string/toggle_text_off}"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/toggle_text_size" />
-                <TextView
+                    android:src="@drawable/bright_level"
+                    android:visibility="@{vm.isAPI33Higher ? (vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE) : View.GONE}" />
+                <!--android:visibility="@{vm.isToggleChecked() ? (vm.isSwitchScreen()?View.GONE:View.VISIBLE) : View.VISIBLE}"-->
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:visibility="@{vm.isToggleChecked? (vm.isSwitchLock ? View.VISIBLE : View.GONE):View.GONE}"
-                    android:text="@string/toggle_text_on_lock"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="@{vm.isToggleChecked ? (vm.isSwitchLock ? Gravity.CENTER|Gravity.BOTTOM : Gravity.CENTER) : Gravity.CENTER}"
+                        android:text="@{vm.isToggleChecked? @string/toggle_text_on:@string/toggle_text_off}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/toggle_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/toggle_text_on_lock"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/toggle_text_guide_size"
+                        android:visibility="@{vm.isToggleChecked? (vm.isSwitchLock ? View.VISIBLE : View.GONE):View.GONE}" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@{vm.isToggleChecked? (vm.isSwitchLock ? @string/toggle_text_guide_lock : @string/toggle_text_guide):@string/toggle_text_guide}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/toggle_text_guide_size" />
+
             </LinearLayout>
 
-            
-            <TextView
+            <!--
+                    <ToggleButton
+                        android:id="@+id/toggle_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.9"
+                        android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
+                        android:checked="@={vm.isToggleChecked}"
+                        android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
+                        android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}"
+                        android:textAllCaps="false"
+                        android:textOff="@string/toggle_text_off"
+                        android:textOn="@{vm.isSwitchLock ? @string/toggle_text_on_lock : @string/toggle_text_on}"
+                        android:textSize="@dimen/toggle_text_size" />
+            -->
+
+            <Button
+                android:id="@+id/setting_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:background="@{vm.isSwitchScreen ?@drawable/button_ripple_screen_effect : @drawable/button_ripple_effect}"
+                android:onClick="@{() -> vm.pause()}"
+                android:padding="0dp"
+                android:text="▲"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}" />
+
+            <LinearLayout
+                android:id="@+id/radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@{vm.isToggleChecked? (vm.isSwitchLock ? @string/toggle_text_guide_lock : @string/toggle_text_guide):@string/toggle_text_guide}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/toggle_text_guide_size"
-                android:gravity="center_horizontal" />
+                android:layout_weight="0.1"
+                android:orientation="horizontal"
+                android:visibility="@{vm.isToggleChecked()? View.GONE : View.VISIBLE}"
+                tools:ignore="UseSwitchCompatOrMaterialXml">
 
+                <Switch
+                    android:id="@+id/switch_immediate"
+                    style="@style/Main.Switch"
+                    android:background="@color/main_level1"
+                    android:checked="@{vm.isSwitchImmediate()}"
+                    android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                    android:text="@string/switch_immediate"
+                    android:textOff="off"
+                    android:textOn="on" />
+
+                <Switch
+                    android:id="@+id/switch_screen"
+                    style="@style/Main.Switch"
+                    android:background="@color/main_level2"
+                    android:checked="@{vm.isSwitchScreen()}"
+                    android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                    android:text="@string/switch_screen" />
+
+                <Switch
+                    android:id="@+id/switch_lock"
+                    style="@style/Main.Switch"
+                    android:background="@color/main_level3"
+                    android:checked="@{vm.isSwitchLock()}"
+                    android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
+                    android:text="@string/switch_lock" />
+
+            </LinearLayout>
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-8864450225884051/2801710891"></com.google.android.gms.ads.AdView>
         </LinearLayout>
-
-<!--
-        <ToggleButton
-            android:id="@+id/toggle_button"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9"
-            android:background="@{vm.isSwitchScreen ? @drawable/toggle_screen_selector : @drawable/toggle_ripple}"
-            android:checked="@={vm.isToggleChecked}"
-            android:enabled="@{vm.isSwitchLock ? (vm.isToggleChecked ? false : true) : true}"
-            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.onCheckedChanged(isChecked)}"
-            android:textAllCaps="false"
-            android:textOff="@string/toggle_text_off"
-            android:textOn="@{vm.isSwitchLock ? @string/toggle_text_on_lock : @string/toggle_text_on}"
-            android:textSize="@dimen/toggle_text_size" />
--->
-
-        <Button
-            android:id="@+id/setting_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@{vm.isSwitchScreen ?@drawable/button_ripple_screen_effect : @drawable/button_ripple_effect}"
-            android:layout_margin="0dp"
-            android:padding="0dp"
-            android:text="▲"
-            android:textColor="@color/black"
-            android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}"
-            android:onClick="@{() -> vm.pause()}"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:id="@+id/radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:orientation="horizontal"
-            android:visibility="@{vm.isToggleChecked()? View.GONE : View.VISIBLE}"
-            tools:ignore="UseSwitchCompatOrMaterialXml">
-
-            <Switch
-                android:id="@+id/switch_immediate"
-                style="@style/Main.Switch"
-                android:background="@color/main_level1"
-                android:checked="@{vm.isSwitchImmediate()}"
-                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
-                android:textOn="on"
-                android:textOff="off"
-                android:text="@string/switch_immediate"  />
-
-            <Switch
-                android:id="@+id/switch_screen"
-                style="@style/Main.Switch"
-                android:background="@color/main_level2"
-                android:checked="@{vm.isSwitchScreen()}"
-                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
-                android:text="@string/switch_screen" />
-
-            <Switch
-                android:id="@+id/switch_lock"
-                style="@style/Main.Switch"
-                android:background="@color/main_level3"
-                android:checked="@{vm.isSwitchLock()}"
-                android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
-                android:text="@string/switch_lock" />
-
-        </LinearLayout>
-
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-8864450225884051/2801710891">
-        </com.google.android.gms.ads.AdView>
-    </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
 
