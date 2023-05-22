@@ -13,4 +13,9 @@
 
     <string name="torch_toast">조명 기능을 사용할 수 없는 디바이스입니다</string>
     <string name="torch_level">조명밝기</string>
+
+    <!--update-->
+    <string name="update_title">업데이트 알림</string>
+    <string name="update_content">최신 버전으로 업데이트 하시겠습니까?</string>
+    <string name="update_ok">확인</string>
 </resources>

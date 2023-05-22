@@ -13,4 +13,9 @@
 
     <string name="torch_toast">Flash unavailable device</string>
     <string name="torch_level">FlashLevel</string>
+
+    <!--update-->
+    <string name="update_title">update notification</string>
+    <string name="update_content">Would you like to update to the latest version?</string>
+    <string name="update_ok">OK</string>
 </resources>

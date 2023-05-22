@@ -96,9 +96,9 @@ class MainActivity : AppCompatActivity() {
                     // google store update
                     try {
                         val builder = AlertDialog.Builder(context)
-                            .setTitle("업데이트 알림")
-                            .setMessage("최신 버전으로 업데이트 하시겠습니까?")
-                            .setPositiveButton("확인") { _, _ ->
+                            .setTitle(resources.getString(R.string.update_title))
+                            .setMessage(resources.getString(R.string.update_content))
+                            .setPositiveButton(resources.getString(R.string.update_ok)) { _, _ ->
                                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                             }
 
