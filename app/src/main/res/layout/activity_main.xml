@@ -48,6 +48,7 @@
                         android:layout_width="@dimen/close_btn_size"
                         android:layout_height="@dimen/close_btn_size"
                         android:background="@drawable/menu_selector"
+                        android:visibility="gone"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
