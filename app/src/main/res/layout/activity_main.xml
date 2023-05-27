@@ -80,7 +80,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <!--<TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -88,9 +88,15 @@
                         android:text="@{vm.isToggleChecked? @string/toggle_text_on:@string/toggle_text_off}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/toggle_text_size"
-                        android:textStyle="bold" />
+                        android:textStyle="bold" />-->
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@{vm.isToggleChecked? @drawable/baseline_flashlight_on_24:@drawable/baseline_flashlight_off_24}" />
+
+                    <!--<TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -98,7 +104,14 @@
                         android:text="@string/toggle_text_on_lock"
                         android:textColor="@color/white"
                         android:textSize="@dimen/toggle_text_guide_size"
-                        android:visibility="@{vm.isToggleChecked? (vm.isSwitchLock ? View.VISIBLE : View.GONE):View.GONE}" />
+                        android:visibility="@{vm.isToggleChecked? (vm.isSwitchLock ? View.VISIBLE : View.GONE):View.INVISIBLE}" />-->
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@{vm.isToggleChecked ? (vm.isSwitchLock ? @drawable/baseline_lock_24:@drawable/baseline_lock_open_24):@drawable/baseline_lock_open_24}"
+                        android:visibility="invisible"/>
                 </LinearLayout>
 
 
