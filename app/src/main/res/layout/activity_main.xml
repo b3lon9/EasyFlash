@@ -42,24 +42,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/close_btn_margin"
-                    android:visibility="@{vm.isToggleChecked? (vm.isSwitchScreen? View.GONE : View.VISIBLE) : View.VISIBLE}" >
+                    android:visibility="@{vm.isToggleChecked? (vm.isSwitchScreen? View.GONE : View.VISIBLE) : View.VISIBLE}">
+
                     <Button
                         android:id="@+id/menu_btn"
                         android:layout_width="@dimen/close_btn_size"
                         android:layout_height="@dimen/close_btn_size"
                         android:background="@drawable/menu_selector"
                         android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <Button
                         android:id="@+id/close_btn"
                         android:layout_width="@dimen/close_btn_size"
                         android:layout_height="@dimen/close_btn_size"
                         android:background="@drawable/close_selector"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,7 +97,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:src="@{vm.isToggleChecked? @drawable/baseline_flashlight_on_24:@drawable/baseline_flashlight_off_24}"
-                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.GONE : View.VISIBLE) : View.VISIBLE}"/>
+                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.GONE : View.VISIBLE) : View.VISIBLE}" />
 
                     <!--<TextView
                         android:layout_width="match_parent"
@@ -111,13 +113,14 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:visibility="@{vm.isToggleChecked ? (vm.isSwitchLock ? View.VISIBLE : View.GONE) : View.GONE}" />
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:maxWidth="@dimen/flash_size"
                         android:src="@{vm.isToggleChecked ? (vm.isSwitchLock ? @drawable/baseline_lock_24:@drawable/baseline_lock_open_24):@drawable/baseline_lock_open_24}"
-                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"/>
+                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -135,7 +138,7 @@
                     android:text="@{vm.isToggleChecked? (vm.isSwitchLock ? @string/toggle_text_guide_lock : @string/toggle_text_guide):@string/toggle_text_guide}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/toggle_text_guide_size"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -212,7 +215,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 ads:adSize="SMART_BANNER"
-                ads:adUnitId="ca-app-pub-8864450225884051/2801710891"></com.google.android.gms.ads.AdView>
+                ads:adUnitId="ca-app-pub-8864450225884051/2801710891"
+                tools:ignore="ObsoleteLayoutParam" />
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

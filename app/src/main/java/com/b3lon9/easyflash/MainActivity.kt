@@ -7,6 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -31,6 +34,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vm:MainViewModel
 
     private val context:Context = this
+
+    private lateinit var animationFadeOut:Animation
+    private lateinit var animationFadeIn:Animation
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) {
             binding.banner.visibility = View.GONE
         }
+
+        animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+        animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
     }
 
     override fun onResume() {
@@ -232,7 +243,23 @@ class MainActivity : AppCompatActivity() {
             }
 
             MotionEvent.ACTION_UP -> {
-                if (abs(vm.firstY - (event.y).toInt()) < 10) vm.onCheckedChanged(!view!!.isSelected)
+                if (abs(vm.firstY - (event.y).toInt()) < 10) {
+                    animationFadeOut.setAnimationListener(object:AnimationListener {
+                        override fun onAnimationStart(p0: Animation?) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animation?) {
+                            vm.onCheckedChanged(!view!!.isSelected)
+
+                            binding.toggleView.startAnimation(animationFadeIn)
+                        }
+
+                        override fun onAnimationRepeat(p0: Animation?) {
+                        }
+
+                    })
+                    binding.toggleView.startAnimation(animationFadeOut)
+                }
                 vm.direct = Constant.Direct.NORMAL
                 vm.clearFlag()
             }
