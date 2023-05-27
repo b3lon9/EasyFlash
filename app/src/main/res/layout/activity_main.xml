@@ -120,7 +120,8 @@
                         android:layout_weight="1"
                         android:maxWidth="@dimen/flash_size"
                         android:src="@{vm.isToggleChecked ? (vm.isSwitchLock ? @drawable/baseline_lock_24:@drawable/baseline_lock_open_24):@drawable/baseline_lock_open_24}"
-                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}" />
+                        android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"
+                        android:onClickListener="@{() -> vm.lockGuide()}"/>
 
                     <Space
                         android:layout_width="match_parent"
@@ -167,7 +168,7 @@
                 android:onClick="@{() -> vm.pause()}"
                 android:padding="0dp"
                 android:text="▲"
-                android:textColor="@color/black"
+                android:textColor="@color/main_level1"
                 android:textSize="24sp"
                 android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}" />
 

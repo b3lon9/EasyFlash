@@ -194,6 +194,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         }
     }
 
+    fun lockGuide() {
+        Toast.makeText(context, context.resources.getString(R.string.toggle_text_guide_lock), Toast.LENGTH_SHORT).show()
+    }
+
     private fun beepOn() {
         audioManager?.playSoundEffect(AudioManager.FX_KEY_CLICK)
     }
