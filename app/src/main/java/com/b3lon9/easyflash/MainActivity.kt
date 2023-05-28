@@ -24,20 +24,21 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
-    private lateinit var vm:MainViewModel
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var vm: MainViewModel
+    private lateinit var myRef: DatabaseReference
 
-    private val context:Context = this
+    private val context: Context = this
 
-    private lateinit var animationFadeOut:Animation
-    private lateinit var animationFadeIn:Animation
-
+    private lateinit var animationFadeOut: Animation
+    private lateinit var animationFadeIn: Animation
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -52,10 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         admob()
 
-        firebaseRealtimeDatabase()
-
         binding.toggleView.setOnTouchListener(touchListener)
-        vm.isToggleChecked.observe(this, Observer{
+        vm.isToggleChecked.observe(this, Observer {
             binding.toggleView.isSelected = it
         })
 
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             vm.flashLevel(it)
         }
 
-        binding.closeBtn.setOnClickListener{
+        binding.closeBtn.setOnClickListener {
             finish()
         }
 
@@ -74,6 +73,12 @@ class MainActivity : AppCompatActivity() {
 
         animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         animationFadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        firebaseRealtimeDatabase()
     }
 
     override fun onResume() {
@@ -86,6 +91,14 @@ class MainActivity : AppCompatActivity() {
         vm.pause()
     }
 
+    override fun onStop() {
+        super.onStop()
+        myRef?.apply {
+            removeEventListener(eventListener)
+            removeValue()
+        }
+    }
+
     private fun admob() {
         MobileAds.initialize(this)
 
@@ -95,39 +108,44 @@ class MainActivity : AppCompatActivity() {
 
     private fun firebaseRealtimeDatabase() {
         val database = Firebase.database
-        val myRef = database.getReference("version")
+        myRef = database.getReference("version")
+        //myRef = database.getReference("test")
 
-        myRef.addValueEventListener(object:ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val value = snapshot.value as String
+        myRef.addValueEventListener(eventListener)
+    }
 
-                if (BuildConfig.VERSION_NAME < value) {
-                    val url = "https://play.google.com/store/apps/details?id=$packageName"
+    private val eventListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            val value = snapshot.value as String
 
-                    // google store update
-                    try {
-                        val builder = AlertDialog.Builder(context)
-                            .setTitle(resources.getString(R.string.update_title))
-                            .setMessage(resources.getString(R.string.update_content))
-                            .setPositiveButton(resources.getString(R.string.update_ok)) { _, _ ->
-                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-                            }
+            if (BuildConfig.VERSION_NAME < value) {
+                val url = "https://play.google.com/store/apps/details?id=$packageName"
 
-                        builder.let {
-                            val dialog = it.create()
-                            dialog.show()
+                // google store update
+                try {
+                    val builder = AlertDialog.Builder(context)
+                        .setTitle(resources.getString(R.string.update_title))
+                        .setMessage(resources.getString(R.string.update_content))
+                        .setPositiveButton(resources.getString(R.string.update_ok)) { _, _ ->
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         }
 
-                    } finally {
-
+                    builder.let {
+                        val dialog = it.create()
+                        dialog.show()
                     }
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+
                 }
             }
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-                NLog.d("error msg : ${error.toException().message}")
-            }
-        })
+        override fun onCancelled(error: DatabaseError) {
+            NLog.d("error msg : ${error.toException().message}")
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -143,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                     if (it > 0) {
                         // up scroll
                         if (vm.direct == Constant.Direct.UP) {
-                            when(abs(it)) {
+                            when (abs(it)) {
                                 in 0..9 -> {}
                                 in 10..100 -> {
                                     if (!vm.flagLevel1) {
@@ -151,24 +169,28 @@ class MainActivity : AppCompatActivity() {
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 101..200 -> {
                                     if (!vm.flagLevel2) {
                                         vm.flagLevel2 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 201..300 -> {
                                     if (!vm.flagLevel3) {
                                         vm.flagLevel3 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 301..400 -> {
                                     if (!vm.flagLevel4) {
                                         vm.flagLevel4 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 else -> {
                                     if (!vm.flagLevel5) {
                                         vm.flagLevel5 = true
@@ -194,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         // down scroll
                         if (vm.direct == Constant.Direct.DOWN) {
-                            when(abs(it)) {
+                            when (abs(it)) {
                                 in 0..9 -> {}
                                 in 10..100 -> {
                                     if (!vm.flagLevel1) {
@@ -202,24 +224,28 @@ class MainActivity : AppCompatActivity() {
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 101..200 -> {
                                     if (!vm.flagLevel2) {
                                         vm.flagLevel2 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 201..300 -> {
                                     if (!vm.flagLevel3) {
                                         vm.flagLevel3 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 in 301..400 -> {
                                     if (!vm.flagLevel4) {
                                         vm.flagLevel4 = true
                                         vm.flagChange = true
                                     }
                                 }
+
                                 else -> {
                                     if (!vm.flagLevel5) {
                                         vm.flagLevel5 = true
@@ -228,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
-                            if (vm.flagChange && vm.curLevel.value in 2 .. 5) {
+                            if (vm.flagChange && vm.curLevel.value in 2..5) {
                                 vm.curLevel.value = vm.curLevel.value!!.minus(offsetLevel)
                                 vm.flagChange = false
                             }
@@ -244,7 +270,7 @@ class MainActivity : AppCompatActivity() {
 
             MotionEvent.ACTION_UP -> {
                 if (abs(vm.firstY - (event.y).toInt()) < 10) {
-                    animationFadeOut.setAnimationListener(object:AnimationListener {
+                    animationFadeOut.setAnimationListener(object : AnimationListener {
                         override fun onAnimationStart(p0: Animation?) {
                         }
 
