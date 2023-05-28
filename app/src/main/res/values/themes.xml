@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.SmartFlash" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,6 +16,6 @@
         <!-- Customize your theme here. -->
         <item name="android:windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:fontFamily">@font/jejugothic</item>
+        <!--<item name="android:fontFamily">@font/jejugothic</item>-->
     </style>
 </resources>

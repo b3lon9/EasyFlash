@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">簡単照明</string>
+
+    <string name="toggle_text_on">点灯</string>
+    <string name="toggle_text_on_lock">(スクリーンロック)</string>
+    <string name="toggle_text_off">切れ</string>
+    <string name="toggle_text_guide">画面をタッチしてください</string>
+    <string name="toggle_text_guide_lock">画面タッチができません\nック解除は下記のボタンを押してください</string>
+
+    <string name="switch_immediate">直付け</string>
+    <string name="switch_screen">前後照明</string>
+    <string name="switch_lock">ロック</string>
+
+    <string name="torch_toast">照明機能が使用できないデバイスです</string>
+    <string name="torch_level">照明の明るさ</string>
+
+    <!--update-->
+    <string name="update_title">アップデート通知</string>
+    <string name="update_content">最新バージョンにアップデートしますか？</string>
+    <string name="update_ok">確認</string>
+</resources>
