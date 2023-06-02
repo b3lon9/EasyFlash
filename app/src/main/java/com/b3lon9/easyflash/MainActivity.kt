@@ -32,7 +32,10 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var vm: MainViewModel
+    private val vm: MainViewModel by lazy {
+        val factory = ViewModelFactory(context, getPreferences(Context.MODE_PRIVATE))
+        ViewModelProvider(this, factory)[MainViewModel::class.java]
+    }
     private lateinit var myRef: DatabaseReference
 
     private val context: Context = this
@@ -47,8 +50,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
-        val factory = ViewModelFactory(context, getPreferences(Context.MODE_PRIVATE))
-        vm = ViewModelProvider(this, factory)[MainViewModel::class.java]
         binding.vm = vm
 
         admob()
