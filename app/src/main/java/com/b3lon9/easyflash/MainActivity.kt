@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             vm.flashLevel(it)
         }
 
+
         binding.closeBtn.setOnClickListener {
             finish()
         }

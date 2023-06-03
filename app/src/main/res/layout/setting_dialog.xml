@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            style="@style/DialogStyle"
+            android:text="테마색상"/>
+
+        <RadioGroup
+            style="@style/DialogStyle"
+            android:orientation="horizontal">
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+        </RadioGroup>
+
+        <TextView
+            style="@style/DialogStyle"
+            android:text="전면플래시색상" />
+
+        <RadioGroup
+            style="@style/DialogStyle"
+            android:orientation="horizontal">
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+
+            <RadioButton
+                style="@style/DialogStyle.RadioButton"
+                android:text="test1" />
+        </RadioGroup>
+    </LinearLayout>
+</layout>

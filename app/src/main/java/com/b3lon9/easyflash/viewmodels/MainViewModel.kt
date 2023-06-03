@@ -1,6 +1,7 @@
 package com.b3lon9.easyflash.viewmodels
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
@@ -102,6 +103,14 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             if (isChecked) flashOn() else flashOff()
         } finally {
 
+        }
+    }
+
+    fun onSettingDialog() {
+        Dialog(context).apply {
+            setContentView(R.layout.setting_dialog)
+        }.also { dialog ->
+            dialog.show()
         }
     }
 
