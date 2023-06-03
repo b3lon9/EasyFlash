@@ -67,6 +67,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         isAPI33Higher = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
     }
 
+    override fun onCleared() {
+        super.onCleared()
+    }
+
     fun resume() {
         if (isSwitchImmediate.value == true) {
             isToggleChecked.value = true

@@ -7,7 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow"></color>
 
+    <!--green-->
     <color name="main_level1">#EDF1D6</color>
     <color name="main_level2">#9DC08B</color>
     <color name="main_level3">#609966</color>
@@ -23,22 +25,28 @@
     <color name="switch_track_on">#FAD4D4</color>
     <color name="switch_thumb_on">#FD5D5D</color>
 
+    <!--navy-->
+    <color name="main_level1_navy">#DDE6ED</color>
+    <color name="main_level2_navy">#9DB2BF</color>
+    <color name="main_level3_navy">#526D82</color>
+    <color name="main_level4_navy">#27374D</color>
+
+    <color name="fun_level1_navy">#F5EFE7</color>
+    <color name="fun_level2_navy">#D8C4B6</color>
+    <color name="fun_level3_navy">#4F709C</color>
+    <color name="fun_level4_navy">#213555</color>
+
+    <!--pink-->
+    <color name="main_level1_pink">#FFF5E4</color>
+    <color name="main_level2_pink">#FFE3E1</color>
+    <color name="main_level3_pink">#FFD1D1</color>
+    <color name="main_level4_pink">#FF9494</color>
+
+    <color name="fun_level1_pink">#F9F5F6</color>
+    <color name="fun_level2_pink">#F8E8EE</color>
+    <color name="fun_level3_pink">#FDCEDF</color>
+    <color name="fun_level4_pink">#F2BED1</color>
     <!--
-#EDF1D6
-#9DC08B
-#609966
-#40513B
-
-#5F7161
-#6D8B74
-#EFEAD8
-#D0C9C0
-
-#FD5D5D
-#FF8080
-#FFF7BC
-#C0EDA6
-
 - design store
 <main>
 back:#212a3e
