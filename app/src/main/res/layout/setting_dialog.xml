@@ -4,6 +4,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:shadowRadius="30"
         android:orientation="vertical">
         
         <TextView
@@ -14,17 +15,21 @@
             style="@style/DialogStyle"
             android:orientation="horizontal">
 
+            <Space style="@style/SpaceStyle" />
             <RadioButton
                 style="@style/DialogStyle.RadioButton"
-                android:text="test1" />
+                android:background="@drawable/theme_menu_green_selector"/>
+            <Space style="@style/SpaceStyle" />
 
             <RadioButton
                 style="@style/DialogStyle.RadioButton"
-                android:text="test1" />
+                android:background="@drawable/theme_menu_navy_selector" />
+            <Space style="@style/SpaceStyle" />
 
             <RadioButton
                 style="@style/DialogStyle.RadioButton"
-                android:text="test1" />
+                android:background="@drawable/theme_menu_pink_selector"/>
+            <Space style="@style/SpaceStyle" />
         </RadioGroup>
 
         <TextView

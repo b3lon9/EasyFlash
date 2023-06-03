@@ -6,6 +6,8 @@
     <dimen name="close_btn_size">48dp</dimen>
     <dimen name="close_btn_margin">24dp</dimen>
 
+    <dimen name="menu_theme_radiobutton_size">36dp</dimen>
+
     <dimen name="flash_size">120dp</dimen>
 
     <dimen name="switch_width">46dp</dimen>

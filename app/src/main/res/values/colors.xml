@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow"></color>
 
+    <color name="menu_pick">@color/switch_thumb_on</color>
+
     <!--green-->
     <color name="main_level1">#EDF1D6</color>
     <color name="main_level2">#9DC08B</color>

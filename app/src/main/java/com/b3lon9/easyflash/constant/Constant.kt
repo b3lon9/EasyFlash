@@ -16,4 +16,10 @@ class Constant {
         UP,
         DOWN,
     }
+
+    enum class Theme {
+        GREEN,
+        NAVY,
+        PINK,
+    }
 }
