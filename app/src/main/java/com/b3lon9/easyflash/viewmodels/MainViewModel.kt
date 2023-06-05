@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
+import com.b3lon9.easyflash.views.SettingDialog
 import com.b3lon9.nlog.NLog
 
 @SuppressLint("StaticFieldLeak")
@@ -44,6 +45,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     var flagLevel3 = false
     var flagLevel4 = false
     var flagLevel5 = false
+
+    private val settingDialog:SettingDialog by lazy {
+        SettingDialog(context)
+    }
 
     init {
         isSwitchImmediate.value = pref.getBoolean(context.getString(R.string.switch_immediate), false)
@@ -107,11 +112,11 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     }
 
     fun onSettingDialog() {
-        Dialog(context).apply {
-            setContentView(R.layout.setting_dialog)
-        }.also { dialog ->
-            dialog.show()
-        }
+        settingDialog.show()
+    }
+
+    fun onCheckedChanged(num:Int) {
+        NLog.d("... num : $num")
     }
 
     fun onSwitchToggleChanged(view:View, isChecked: Boolean) {
