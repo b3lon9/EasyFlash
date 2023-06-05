@@ -7,7 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="yellow"></color>
+    <color name="white_yellow">#FFFFFFCC</color>
+    <color name="yellow">#FFFFFF00</color>
+    <color name="material_grey_800">#ff424242</color>
+
 
     <color name="menu_pick">@color/switch_thumb_on</color>
 
@@ -26,6 +29,17 @@
     <color name="switch_thumb_off">#F5EDDC</color>
     <color name="switch_track_on">#FAD4D4</color>
     <color name="switch_thumb_on">#FD5D5D</color>
+
+    <!--beige-->
+    <color name="main_level1_beige">#8D7B68</color>
+    <color name="main_level2_beige">#A4907C</color>
+    <color name="main_level3_beige">#C8B6A6</color>
+    <color name="main_level4_beige">#F1DEC9</color>
+
+    <color name="fun_level1_beige">#674F04</color>
+    <color name="fun_level2_beige">#A28F70</color>
+    <color name="fun_level3_beige">#D3BD9A</color>
+    <color name="fun_level4_beige">#F5F0E8</color>
 
     <!--navy-->
     <color name="main_level1_navy">#DDE6ED</color>
@@ -48,7 +62,8 @@
     <color name="fun_level2_pink">#F8E8EE</color>
     <color name="fun_level3_pink">#FDCEDF</color>
     <color name="fun_level4_pink">#F2BED1</color>
-    <!--
+
+<!--
 - design store
 <main>
 back:#212a3e
