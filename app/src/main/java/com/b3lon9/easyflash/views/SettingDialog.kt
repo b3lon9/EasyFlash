@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.databinding.SettingDialogBinding
+import com.b3lon9.easyflash.models.SettingModel
 
 class SettingDialog(private val context:Context) : Dialog(context) {
     private lateinit var binding:SettingDialogBinding
+    private lateinit var listener:SettingDataListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,5 +26,13 @@ class SettingDialog(private val context:Context) : Dialog(context) {
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+    }
+
+    fun setDataListener(listener:SettingDataListener) {
+        this.listener = listener
+    }
+
+    interface SettingDataListener {
+        fun onThemeColor(data:SettingModel)
     }
 }

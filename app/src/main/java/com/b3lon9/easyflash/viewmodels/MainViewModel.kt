@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
+import com.b3lon9.easyflash.models.SettingModel
 import com.b3lon9.easyflash.views.SettingDialog
 import com.b3lon9.nlog.NLog
 
@@ -47,7 +48,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     var flagLevel5 = false
 
     private val settingDialog:SettingDialog by lazy {
-        SettingDialog(context)
+        SettingDialog(context).apply {
+            setDataListener(settingListener)
+        }
     }
 
     init {
@@ -218,5 +221,12 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     private fun beepOn() {
         audioManager?.playSoundEffect(AudioManager.FX_KEY_CLICK)
+    }
+
+    /* setting contents listener */
+    private val settingListener = object :SettingDialog.SettingDataListener {
+        override fun onThemeColor(data: SettingModel) {
+
+        }
     }
 }
