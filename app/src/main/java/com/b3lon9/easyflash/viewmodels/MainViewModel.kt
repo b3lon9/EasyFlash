@@ -1,7 +1,6 @@
 package com.b3lon9.easyflash.viewmodels
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
@@ -12,13 +11,11 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
-import com.b3lon9.easyflash.models.SettingModel
 import com.b3lon9.easyflash.views.SettingDialog
 import com.b3lon9.nlog.NLog
 
@@ -225,8 +222,12 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     /* setting contents listener */
     private val settingListener = object :SettingDialog.SettingDataListener {
-        override fun onThemeColor(data: SettingModel) {
+        override fun onThemeColor(themeColor: Int) {
+            TODO("Not yet implemented")
+        }
 
+        override fun onScreenColor(screenColor: Int) {
+            TODO("Not yet implemented")
         }
     }
 }
