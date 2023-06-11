@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.RadioGroup
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.databinding.DataBindingUtil
 import com.b3lon9.easyflash.R
@@ -48,7 +49,7 @@ class SettingDialog(private val context:Context) : Dialog(context) {
     }
 
     interface SettingDataListener {
-        fun onThemeColor(@IdRes themeColor:Int)
-        fun onScreenColor(@IdRes screenColor:Int)
+        fun onThemeColor(@DrawableRes themeColor:Int)
+        fun onScreenColor(@DrawableRes screenColor:Int)
     }
 }

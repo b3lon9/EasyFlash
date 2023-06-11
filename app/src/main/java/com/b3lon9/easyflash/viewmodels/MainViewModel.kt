@@ -11,6 +11,7 @@ import android.os.Build
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
@@ -32,6 +33,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchImmediate    = MutableLiveData(false)
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
+
+    val toggleScreenSelector = MutableLiveData<Int>()
+    val toggleRipple         = MutableLiveData<Int>()
 
     var firstY = -1
     var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1))
