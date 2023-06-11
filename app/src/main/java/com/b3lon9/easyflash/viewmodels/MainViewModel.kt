@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import android.graphics.drawable.Drawable
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
@@ -34,8 +35,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
-    val toggleScreenSelector = MutableLiveData<Int>()
-    val toggleRipple         = MutableLiveData<Int>()
+    @DrawableRes val toggleScreenSelector = MutableLiveData<Int>()
+    @DrawableRes val toggleRipple         = MutableLiveData<Int>()
+    @DrawableRes val menuSelector         = MutableLiveData<Int>()
+    @DrawableRes val closeSelector        = MutableLiveData<Int>()
+
+    @DrawableRes val buttonRippleScreenEffect = MutableLiveData<Int>()
+    @DrawableRes val buttonRippleEffect       = MutableLiveData<Int>()
 
     var firstY = -1
     var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1))
@@ -228,6 +234,8 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     private val settingListener = object :SettingDialog.SettingDataListener {
         override fun onThemeColor(themeColor: Int) {
             TODO("Not yet implemented")
+            toggleScreenSelector.value = R.drawable.toggle_screen_selector
+            toggleRipple.value = R.drawable.toggle_ripple
         }
 
         override fun onScreenColor(screenColor: Int) {
