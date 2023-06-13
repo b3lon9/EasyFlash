@@ -11,7 +11,7 @@
         
         <TextView
             style="@style/DialogStyle"
-            android:text="테마색상"/>
+            android:text="@string/setting_theme_color"/>
 
         <RadioGroup
             android:id="@+id/theme_radio_group"
@@ -51,7 +51,7 @@
 
         <TextView
             style="@style/DialogStyle"
-            android:text="전면플래시색상" />
+            android:text="@string/setting_screen_color" />
 
         <RadioGroup
             android:id="@+id/screen_radio_group"
