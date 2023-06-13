@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             binding.toggleView.isSelected = it
         })
 
+
         vm.curLevel.observe(this) {
             binding.brightImg.setImageLevel(it)
             vm.flashLevel(it)

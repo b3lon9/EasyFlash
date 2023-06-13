@@ -13,11 +13,16 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b3lon9.easyflash.MainActivity
 import com.b3lon9.easyflash.R
 import com.b3lon9.easyflash.constant.Constant
+import com.b3lon9.easyflash.constant.Constant.Level
+import com.b3lon9.easyflash.constant.Constant.Theme
+import com.b3lon9.easyflash.constant.Constant.Screen
 import com.b3lon9.easyflash.views.SettingDialog
 import com.b3lon9.nlog.NLog
 
@@ -35,8 +40,8 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
-    @DrawableRes val toggleScreenSelector = MutableLiveData<Int>()
-    @DrawableRes val toggleRipple         = MutableLiveData<Int>()
+    var toggleScreenSelector = MutableLiveData<Drawable>()
+    var toggleRipple         = MutableLiveData<Drawable>()
     @DrawableRes val menuSelector         = MutableLiveData<Int>()
     @DrawableRes val closeSelector        = MutableLiveData<Int>()
 
@@ -44,7 +49,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     @DrawableRes val buttonRippleEffect       = MutableLiveData<Int>()
 
     var firstY = -1
-    var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Constant.Level.FLASH_LEVEL1))
+    var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Level.FLASH_LEVEL1))
     var direct = Constant.Direct.NORMAL
 
     var flagChange = false
@@ -55,7 +60,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     var flagLevel5 = false
 
     private val settingDialog:SettingDialog by lazy {
-        SettingDialog(context).apply {
+        SettingDialog(context, this).apply {
             setDataListener(settingListener)
         }
     }
@@ -64,6 +69,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         isSwitchImmediate.value = pref.getBoolean(context.getString(R.string.switch_immediate), false)
         isSwitchScreen.value = pref.getBoolean(context.getString(R.string.switch_screen), false)
         isSwitchLock.value = pref.getBoolean(context.getString(R.string.switch_lock), false)
+
+        // todo(change variable to preference)
+        toggleScreenSelector.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_screen_selector))
+        toggleRipple.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_ripple))
 
         try {
             val cameraIds = cameraManager.cameraIdList
@@ -232,14 +241,25 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
 
     /* setting contents listener */
     private val settingListener = object :SettingDialog.SettingDataListener {
-        override fun onThemeColor(themeColor: Int) {
-            TODO("Not yet implemented")
-            toggleScreenSelector.value = R.drawable.toggle_screen_selector
-            toggleRipple.value = R.drawable.toggle_ripple
+        override fun onThemeColor(themeColor: Theme) {
+            toggleScreenSelector.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+                Theme.BEIGE -> R.drawable.toggle_screen_selector_beige
+                Theme.NAVY -> R.drawable.toggle_screen_selector_navy
+                Theme.PINK -> R.drawable.toggle_screen_selector_pink
+                else -> R.drawable.toggle_screen_selector
+            }))
+
+            toggleRipple.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+                Theme.BEIGE -> R.drawable.toggle_ripple_beige
+                Theme.NAVY -> R.drawable.toggle_ripple_navy
+                Theme.PINK -> R.drawable.toggle_ripple_pink
+                else -> R.drawable.toggle_ripple
+            }))
+
+            NLog.d("... ${toggleScreenSelector.value}")
         }
 
-        override fun onScreenColor(screenColor: Int) {
-            TODO("Not yet implemented")
+        override fun onScreenColor(screenColor: Screen) {
         }
     }
 }

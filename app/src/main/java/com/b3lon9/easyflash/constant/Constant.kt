@@ -19,7 +19,14 @@ class Constant {
 
     enum class Theme {
         GREEN,
+        BEIGE,
         NAVY,
         PINK,
+    }
+
+    enum class Screen {
+        WHITE,
+        WHITEYELLOW,
+        YELLOW,
     }
 }

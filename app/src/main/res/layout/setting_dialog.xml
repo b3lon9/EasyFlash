@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+        <import type="com.b3lon9.easyflash.constant.Constant" />
+
+        <variable type="com.b3lon9.easyflash.views.SettingDialog" name="dialog" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp" >
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/menu_dialog_padding"
@@ -16,16 +27,14 @@
         <RadioGroup
             android:id="@+id/theme_radio_group"
             style="@style/DialogStyle"
-            android:orientation="horizontal">
-<!--
+            android:orientation="horizontal"
+            android:onCheckedChanged="@{(radio, id) -> dialog.onThemeCheckedChanged(id)}">
 
-            android:onCheckedChanged="@{(radio, num) -> vm.onCheckedChanged(num)}"
-            -->
             <Space style="@style/SpaceStyle" />
             <RadioButton
                 android:id="@+id/theme_radio_green"
                 style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_green_selector"/>
+                android:background="@drawable/theme_menu_green_selector" />
 
             <Space style="@style/SpaceStyle" />
 
@@ -82,5 +91,13 @@
                 android:background="@drawable/theme_menu_yellow_selector"/>
             <Space style="@style/SpaceStyle" />
         </RadioGroup>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
+    </LinearLayout>
+
 </layout>
