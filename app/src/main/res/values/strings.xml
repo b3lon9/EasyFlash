@@ -19,4 +19,9 @@
     <string name="update_title">update notification</string>
     <string name="update_content">Would you like to update to the latest version?</string>
     <string name="update_ok">OK</string>
+
+
+    <!--setting-->
+    <string name="setting_theme_color">Theme Color</string>
+    <string name="setting_screen_color">Screen Flash Color</string>
 </resources>

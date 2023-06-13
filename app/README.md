@@ -15,4 +15,5 @@
     - 닫기 버튼 추후 업데이트
    
 MAC Code Commit TEST 
+Lenovo Code Commit TEST
 ```

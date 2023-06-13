@@ -19,4 +19,8 @@
     <string name="update_title">アップデート通知</string>
     <string name="update_content">最新バージョンにアップデートしますか？</string>
     <string name="update_ok">確認</string>
+
+    <!--setting-->
+    <string name="setting_theme_color">テーマカラー</string>
+    <string name="setting_screen_color">スクリーン フラッシュの色</string>
 </resources>
