@@ -52,8 +52,6 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.vm = vm
 
-        admob()
-
         binding.toggleView.setOnTouchListener(touchListener)
         vm.isToggleChecked.observe(this, Observer {
             binding.toggleView.isSelected = it
@@ -72,6 +70,8 @@ class MainActivity : AppCompatActivity() {
 
         if (BuildConfig.DEBUG) {
             binding.banner.visibility = View.GONE
+        } else {
+            admob()
         }
 
         animationFadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
@@ -80,26 +80,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        firebaseRealtimeDatabase()
     }
 
     override fun onResume() {
         super.onResume()
         vm.resume()
+
+        firebaseRealtimeDatabase()
     }
 
     override fun onPause() {
         super.onPause()
         vm.pause()
+
+        myRef.apply {
+            removeEventListener(eventListener)
+            removeValue()
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        myRef?.apply {
-            removeEventListener(eventListener)
-            removeValue()
-        }
     }
 
     private fun admob() {
@@ -110,16 +111,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun firebaseRealtimeDatabase() {
+        try {
         val database = Firebase.database
         myRef = database.getReference("version")
         //myRef = database.getReference("test")
 
         myRef.addValueEventListener(eventListener)
+        } catch (e:Exception) {
+            e.printStackTrace()     // report server -- 
+        }
     }
 
     private val eventListener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
-            val value = snapshot.value as String
+            val value:String = snapshot.value.toString()
 
             if (BuildConfig.VERSION_NAME < value) {
                 val url = "https://play.google.com/store/apps/details?id=$packageName"

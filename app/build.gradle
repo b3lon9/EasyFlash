@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
 
     //external library
-    implementation 'com.github.b3lon9:NLog:1.0.1'
+    implementation 'com.github.b3lon9:NLog:1.0.3'
 
     //admob
     implementation 'com.google.android.gms:play-services-ads:22.0.0'
