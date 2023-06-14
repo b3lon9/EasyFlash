@@ -41,6 +41,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
+    var themeColor:Int = pref.getInt("themeColor", Theme.GREEN.ordinal)
+    var screenColor:Int = pref.getInt("screenColor", Screen.WHITE.ordinal)
+
     val toggleScreenSelector = MutableLiveData<Drawable>()
     val toggleRipple         = MutableLiveData<Drawable>()
     val baseLineFlashLightOn   = MutableLiveData<Drawable>()
@@ -245,16 +248,20 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     /* setting contents listener */
     private val settingListener = object :SettingDialog.SettingDataListener {
         override fun onThemeColor(themeColor: Theme) {
+            editor.apply {
+                putInt("themeColor", themeColor.ordinal)
+                apply()
+            }
 
             when(themeColor) {
                 Theme.BEIGE -> R.drawable.toggle_screen_selector_beige
                 Theme.NAVY -> R.drawable.toggle_screen_selector_navy
                 Theme.PINK -> R.drawable.toggle_screen_selector_pink
                 else -> R.drawable.toggle_screen_selector
-            }.let {
-                toggleScreenSelector.postValue(ContextCompat.getDrawable(context, it))
+            }.let { id ->
+                toggleScreenSelector.postValue(ContextCompat.getDrawable(context, id))
                 editor.apply {
-                    putInt(::toggleScreenSelector.name, it)
+                    putInt(::toggleScreenSelector.name, id)
                     apply()
                 }
             }
@@ -284,6 +291,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         }
 
         override fun onScreenColor(screenColor: Screen) {
+            editor.apply {
+                putInt("screenColor", screenColor.ordinal)
+                apply()
+            }
         }
     }
 }

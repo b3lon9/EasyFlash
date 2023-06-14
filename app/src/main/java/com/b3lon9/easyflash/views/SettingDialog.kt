@@ -36,6 +36,20 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
         window?.setBackgroundDrawable(context.getDrawable(android.R.color.transparent))
 
         setOnDismissListener(this)
+
+
+        binding.themeRadioGroup.check(when(Theme.values()[vm.themeColor]) {
+            Theme.BEIGE -> R.id.theme_radio_beige
+            Theme.NAVY -> R.id.theme_radio_navy
+            Theme.PINK -> R.id.theme_radio_pink
+            else -> R.id.theme_radio_green
+        })
+
+        binding.screenRadioGroup.check(when(Screen.values()[vm.screenColor]) {
+            Screen.WHITEYELLOW -> R.id.screen_radio_white_yellow
+            Screen.YELLOW -> R.id.screen_radio_yellow
+            else -> R.id.screen_radio_white
+        })
     }
 
     override fun onAttachedToWindow() {
