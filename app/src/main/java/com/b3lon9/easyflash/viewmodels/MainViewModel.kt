@@ -23,6 +23,7 @@ import com.b3lon9.easyflash.constant.Constant
 import com.b3lon9.easyflash.constant.Constant.Level
 import com.b3lon9.easyflash.constant.Constant.Theme
 import com.b3lon9.easyflash.constant.Constant.Screen
+import com.b3lon9.easyflash.converter.ResourceIdConverter
 import com.b3lon9.easyflash.views.SettingDialog
 import com.b3lon9.nlog.NLog
 
@@ -71,7 +72,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         isSwitchLock.value = pref.getBoolean(context.getString(R.string.switch_lock), false)
 
         // todo(change variable to preference)
-        toggleScreenSelector.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_screen_selector))
+        toggleScreenSelector.postValue(ContextCompat.getDrawable(context, pref.getInt(::toggleScreenSelector.name, R.drawable.toggle_screen_selector)))
         toggleRipple.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_ripple))
         baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_on_24))
         baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_off_24))
@@ -244,12 +245,19 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     /* setting contents listener */
     private val settingListener = object :SettingDialog.SettingDataListener {
         override fun onThemeColor(themeColor: Theme) {
-            toggleScreenSelector.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+
+            when(themeColor) {
                 Theme.BEIGE -> R.drawable.toggle_screen_selector_beige
                 Theme.NAVY -> R.drawable.toggle_screen_selector_navy
                 Theme.PINK -> R.drawable.toggle_screen_selector_pink
                 else -> R.drawable.toggle_screen_selector
-            }))
+            }.let {
+                toggleScreenSelector.postValue(ContextCompat.getDrawable(context, it))
+                editor.apply {
+                    putInt(::toggleScreenSelector.name, it)
+                    apply()
+                }
+            }
 
             toggleRipple.postValue(ContextCompat.getDrawable(context, when(themeColor) {
                 Theme.BEIGE -> R.drawable.toggle_ripple_beige
