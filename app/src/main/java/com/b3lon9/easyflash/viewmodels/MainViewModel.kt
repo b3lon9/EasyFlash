@@ -40,10 +40,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
-    var toggleScreenSelector = MutableLiveData<Drawable>()
-    var toggleRipple         = MutableLiveData<Drawable>()
-    @DrawableRes val menuSelector         = MutableLiveData<Int>()
-    @DrawableRes val closeSelector        = MutableLiveData<Int>()
+    val toggleScreenSelector = MutableLiveData<Drawable>()
+    val toggleRipple         = MutableLiveData<Drawable>()
+    val baseLineFlashLightOn   = MutableLiveData<Drawable>()
+    val baseLineFlashLightOff  = MutableLiveData<Drawable>()
 
     @DrawableRes val buttonRippleScreenEffect = MutableLiveData<Int>()
     @DrawableRes val buttonRippleEffect       = MutableLiveData<Int>()
@@ -73,6 +73,8 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         // todo(change variable to preference)
         toggleScreenSelector.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_screen_selector))
         toggleRipple.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_ripple))
+        baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_on_24))
+        baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_off_24))
 
         try {
             val cameraIds = cameraManager.cameraIdList
@@ -254,6 +256,20 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 Theme.NAVY -> R.drawable.toggle_ripple_navy
                 Theme.PINK -> R.drawable.toggle_ripple_pink
                 else -> R.drawable.toggle_ripple
+            }))
+
+            baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+                Theme.BEIGE -> R.drawable.baseline_flashlight_on_24_beige
+                Theme.NAVY -> R.drawable.baseline_flashlight_on_24_navy
+                Theme.PINK -> R.drawable.baseline_flashlight_on_24_pink
+                else -> R.drawable.baseline_flashlight_on_24
+            }))
+
+            baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+                Theme.BEIGE -> R.drawable.baseline_flashlight_off_24_beige
+                Theme.NAVY -> R.drawable.baseline_flashlight_off_24_navy
+                Theme.PINK -> R.drawable.baseline_flashlight_off_24_pink
+                else -> R.drawable.baseline_flashlight_off_24
             }))
 
             NLog.d("... ${toggleScreenSelector.value}")
