@@ -2,21 +2,16 @@ package com.b3lon9.easyflash.views
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RadioGroup
-import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.databinding.DataBindingUtil
 import com.b3lon9.easyflash.R
-import com.b3lon9.easyflash.constant.Constant.Theme
 import com.b3lon9.easyflash.constant.Constant.Screen
+import com.b3lon9.easyflash.constant.Constant.Theme
 import com.b3lon9.easyflash.databinding.SettingDialogBinding
 import com.b3lon9.easyflash.viewmodels.MainViewModel
-import com.b3lon9.nlog.NLog
 
 class SettingDialog(private val context:Context, private val vm:MainViewModel) : Dialog(context) {
     private lateinit var binding:SettingDialogBinding
@@ -96,6 +91,7 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
 
         listener.onThemeColor(themeColor)
         // listener.onScreenColor(screenColor)
+
         dismiss()
     }
     /*override fun onDismiss(dialog: DialogInterface?) {

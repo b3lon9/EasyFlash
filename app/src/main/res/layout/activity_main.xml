@@ -168,7 +168,7 @@
                 android:onClick="@{() -> vm.pause()}"
                 android:padding="0dp"
                 android:text="▲"
-                android:textColor="@color/main_level1"
+                android:textColor="@{vm.switchTextColor}"
                 android:textSize="24sp"
                 android:visibility="@{vm.isSwitchLock ? (vm.isToggleChecked ? View.VISIBLE : View.GONE) : View.GONE}" />
 
