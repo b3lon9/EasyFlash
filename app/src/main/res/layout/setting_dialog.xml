@@ -2,102 +2,116 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <import type="com.b3lon9.easyflash.constant.Constant" />
 
-        <variable type="com.b3lon9.easyflash.views.SettingDialog" name="dialog" />
+        <variable
+            name="dialog"
+            type="com.b3lon9.easyflash.views.SettingDialog" />
     </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="30dp" >
+        android:padding="30dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="@dimen/menu_dialog_padding"
-        android:shadowRadius="30"
-        android:orientation="vertical"
-        android:background="@drawable/menu_background">
-        
-        <TextView
-            style="@style/DialogStyle"
-            android:text="@string/setting_theme_color"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/menu_background"
+            android:orientation="vertical"
+            android:padding="@dimen/menu_dialog_padding"
+            android:shadowRadius="30">
 
-        <RadioGroup
-            android:id="@+id/theme_radio_group"
-            style="@style/DialogStyle"
-            android:orientation="horizontal"
-            android:onCheckedChanged="@{(radio, id) -> dialog.onThemeCheckedChanged(id)}">
+            <TextView
+                style="@style/DialogStyle"
+                android:text="@string/setting_theme_color" />
 
-            <Space style="@style/SpaceStyle" />
-            <RadioButton
-                android:id="@+id/theme_radio_green"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_green_selector" />
+            <RadioGroup
+                android:id="@+id/theme_radio_group"
+                style="@style/DialogStyle"
+                android:onCheckedChanged="@{(radio, id) -> dialog.onThemeCheckedChanged(id)}"
+                android:orientation="horizontal">
 
-            <Space style="@style/SpaceStyle" />
+                <Space style="@style/SpaceStyle" />
 
-            <RadioButton
-                android:id="@+id/theme_radio_beige"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_beige_selector"/>
+                <RadioButton
+                    android:id="@+id/theme_radio_green"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_green_selector" />
 
-            <Space style="@style/SpaceStyle" />
+                <Space style="@style/SpaceStyle" />
 
-            <RadioButton
-                android:id="@+id/theme_radio_navy"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_navy_selector" />
-            <Space style="@style/SpaceStyle" />
+                <RadioButton
+                    android:id="@+id/theme_radio_beige"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_beige_selector" />
 
-            <RadioButton
-                android:id="@+id/theme_radio_pink"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_pink_selector"/>
-            <Space style="@style/SpaceStyle" />
-        </RadioGroup>
+                <Space style="@style/SpaceStyle" />
 
-        <TextView
-            style="@style/DialogStyle"
-            android:text="@string/setting_screen_color" />
+                <RadioButton
+                    android:id="@+id/theme_radio_navy"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_navy_selector" />
 
-        <RadioGroup
-            android:id="@+id/screen_radio_group"
-            style="@style/DialogStyle"
-            android:orientation="horizontal">
+                <Space style="@style/SpaceStyle" />
 
-            <Space style="@style/SpaceStyle" />
+                <RadioButton
+                    android:id="@+id/theme_radio_pink"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_pink_selector" />
 
-            <RadioButton
-                android:id="@+id/screen_radio_white"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_white_selector"/>
-            <Space style="@style/SpaceStyle" />
+                <Space style="@style/SpaceStyle" />
+            </RadioGroup>
 
-            <Space style="@style/SpaceStyle" />
+            <TextView
+                style="@style/DialogStyle"
+                android:text="@string/setting_screen_color"
+                android:visibility="gone" />
 
-            <RadioButton
-                android:id="@+id/screen_radio_white_yellow"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_white_yellow_selector"/>
-            <Space style="@style/SpaceStyle" />
+            <RadioGroup
+                android:id="@+id/screen_radio_group"
+                style="@style/DialogStyle"
+                android:onCheckedChanged="@{(radio, id) -> dialog.onScreenCheckedChanged(id)}"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
-            <Space style="@style/SpaceStyle" />
 
-            <RadioButton
-                android:id="@+id/screen_radio_yellow"
-                style="@style/DialogStyle.RadioButton"
-                android:background="@drawable/theme_menu_yellow_selector"/>
-            <Space style="@style/SpaceStyle" />
-        </RadioGroup>
+                <Space style="@style/SpaceStyle" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/screen_radio_white"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_white_selector" />
+
+                <Space style="@style/SpaceStyle" />
+
+                <Space style="@style/SpaceStyle" />
+
+                <RadioButton
+                    android:id="@+id/screen_radio_white_yellow"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_white_yellow_selector" />
+
+                <Space style="@style/SpaceStyle" />
+
+                <Space style="@style/SpaceStyle" />
+
+                <RadioButton
+                    android:id="@+id/screen_radio_yellow"
+                    style="@style/DialogStyle.RadioButton"
+                    android:background="@drawable/theme_menu_yellow_selector" />
+
+                <Space style="@style/SpaceStyle" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClickListener="@{() -> dialog.dismiss()}"
+                android:text="적용" />
+        </LinearLayout>
     </LinearLayout>
 
 </layout>
