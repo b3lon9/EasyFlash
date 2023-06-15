@@ -184,7 +184,7 @@
                 <Switch
                     android:id="@+id/switch_immediate"
                     style="@style/Main.Switch"
-                    android:background="@color/main_level1"
+                    android:background="@{vm.switchImmediate}"
                     android:checked="@{vm.isSwitchImmediate()}"
                     android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
                     android:text="@string/switch_immediate"
@@ -194,7 +194,7 @@
                 <Switch
                     android:id="@+id/switch_screen"
                     style="@style/Main.Switch"
-                    android:background="@color/main_level2"
+                    android:background="@{vm.switchScreen}"
                     android:checked="@{vm.isSwitchScreen()}"
                     android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
                     android:text="@string/switch_screen" />
@@ -202,7 +202,7 @@
                 <Switch
                     android:id="@+id/switch_lock"
                     style="@style/Main.Switch"
-                    android:background="@color/main_level3"
+                    android:background="@{vm.switchLock}"
                     android:checked="@{vm.isSwitchLock()}"
                     android:onCheckedChanged="@{(v, b) -> vm.onSwitchToggleChanged(v, b)}"
                     android:text="@string/switch_lock" />

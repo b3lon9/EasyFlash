@@ -50,6 +50,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val baseLineFlashLightOff  = MutableLiveData<Drawable>()
     val baseLineLock           = MutableLiveData<Drawable>()
     val baseLineMenu           = MutableLiveData<Drawable>()
+    val switchImmediate        = MutableLiveData<Drawable>()
+    val switchScreen           = MutableLiveData<Drawable>()
+    val switchLock             = MutableLiveData<Drawable>()
 
 
     var firstY = -1
@@ -78,6 +81,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         toggleRipple.postValue(ContextCompat.getDrawable(context, pref.getInt(::toggleRipple.name, R.drawable.toggle_ripple)))
         baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOn.name, R.drawable.baseline_flashlight_on_24)))
         baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOff.name, R.drawable.baseline_flashlight_off_24)))
+
+        switchImmediate.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchImmediate.name, R.color.main_level1)))
+        switchScreen.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchScreen.name, R.color.main_level2)))
+        switchLock.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchLock.name, R.color.main_level3)))
 
         try {
             val cameraIds = cameraManager.cameraIdList
@@ -309,7 +316,52 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 }
             }
 
+            // menu
+
+            // close
+
             // lock
+
+
+            // bottom menu
+            when(themeColor) {
+                Theme.BEIGE -> R.color.main_level1_beige
+                Theme.NAVY -> R.color.main_level1_navy
+                Theme.PINK -> R.color.main_level1_pink
+                else -> R.color.main_level1
+            }.let { id ->
+                switchImmediate.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::switchImmediate.name, id)
+                    apply()
+                }
+            }
+
+            when(themeColor) {
+                Theme.BEIGE -> R.color.main_level2_beige
+                Theme.NAVY -> R.color.main_level2_navy
+                Theme.PINK -> R.color.main_level2_pink
+                else -> R.color.main_level2
+            }.let { id ->
+                switchScreen.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::switchScreen.name, id)
+                    apply()
+                }
+            }
+
+            when(themeColor) {
+                Theme.BEIGE -> R.color.main_level3_beige
+                Theme.NAVY -> R.color.main_level3_navy
+                Theme.PINK -> R.color.main_level3_pink
+                else -> R.color.main_level3
+            }.let { id ->
+                switchLock.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::switchLock.name, id)
+                    apply()
+                }
+            }
         }
 
         override fun onScreenColor(screenColor: Screen) {
