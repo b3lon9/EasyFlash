@@ -44,13 +44,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     var themeColor:Int = pref.getInt("themeColor", Theme.GREEN.ordinal)
     var screenColor:Int = pref.getInt("screenColor", Screen.WHITE.ordinal)
 
-    val toggleScreenSelector = MutableLiveData<Drawable>()
-    val toggleRipple         = MutableLiveData<Drawable>()
+    val toggleScreenSelector   = MutableLiveData<Drawable>()
+    val toggleRipple           = MutableLiveData<Drawable>()
     val baseLineFlashLightOn   = MutableLiveData<Drawable>()
     val baseLineFlashLightOff  = MutableLiveData<Drawable>()
+    val baseLineLock           = MutableLiveData<Drawable>()
+    val baseLineMenu           = MutableLiveData<Drawable>()
 
-    @DrawableRes val buttonRippleScreenEffect = MutableLiveData<Int>()
-    @DrawableRes val buttonRippleEffect       = MutableLiveData<Int>()
 
     var firstY = -1
     var curLevel = MutableLiveData(pref.getInt(context.getString(R.string.torch_level), Level.FLASH_LEVEL1))
@@ -74,11 +74,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         isSwitchScreen.value = pref.getBoolean(context.getString(R.string.switch_screen), false)
         isSwitchLock.value = pref.getBoolean(context.getString(R.string.switch_lock), false)
 
-        // todo(change variable to preference)
         toggleScreenSelector.postValue(ContextCompat.getDrawable(context, pref.getInt(::toggleScreenSelector.name, R.drawable.toggle_screen_selector)))
-        toggleRipple.postValue(ContextCompat.getDrawable(context, R.drawable.toggle_ripple))
-        baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_on_24))
-        baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, R.drawable.baseline_flashlight_off_24))
+        toggleRipple.postValue(ContextCompat.getDrawable(context, pref.getInt(::toggleRipple.name, R.drawable.toggle_ripple)))
+        baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOn.name, R.drawable.baseline_flashlight_on_24)))
+        baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOff.name, R.drawable.baseline_flashlight_off_24)))
 
         try {
             val cameraIds = cameraManager.cameraIdList
@@ -248,11 +247,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     /* setting contents listener */
     private val settingListener = object :SettingDialog.SettingDataListener {
         override fun onThemeColor(themeColor: Theme) {
+            // init theme color
             editor.apply {
                 putInt("themeColor", themeColor.ordinal)
                 apply()
             }
 
+            // base Layout : toggleView
             when(themeColor) {
                 Theme.BEIGE -> R.drawable.toggle_screen_selector_beige
                 Theme.NAVY -> R.drawable.toggle_screen_selector_navy
@@ -266,28 +267,49 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 }
             }
 
-            toggleRipple.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+            // base Layout : toggleView Ripple(default)
+            when(themeColor) {
                 Theme.BEIGE -> R.drawable.toggle_ripple_beige
                 Theme.NAVY -> R.drawable.toggle_ripple_navy
                 Theme.PINK -> R.drawable.toggle_ripple_pink
                 else -> R.drawable.toggle_ripple
-            }))
+            }.let { id ->
+                toggleRipple.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::toggleRipple.name, id)
+                    apply()
+                }
+            }
 
-            baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+            // flashLight ON Image
+            when(themeColor) {
                 Theme.BEIGE -> R.drawable.baseline_flashlight_on_24_beige
                 Theme.NAVY -> R.drawable.baseline_flashlight_on_24_navy
                 Theme.PINK -> R.drawable.baseline_flashlight_on_24_pink
                 else -> R.drawable.baseline_flashlight_on_24
-            }))
+            }.let { id ->
+                baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::baseLineFlashLightOn.name, id)
+                    apply()
+                }
+            }
 
-            baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, when(themeColor) {
+            // flashLight OFF Image
+            when(themeColor) {
                 Theme.BEIGE -> R.drawable.baseline_flashlight_off_24_beige
                 Theme.NAVY -> R.drawable.baseline_flashlight_off_24_navy
                 Theme.PINK -> R.drawable.baseline_flashlight_off_24_pink
                 else -> R.drawable.baseline_flashlight_off_24
-            }))
+            }.let { id ->
+                baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::baseLineFlashLightOff.name, id)
+                    apply()
+                }
+            }
 
-            NLog.d("... ${toggleScreenSelector.value}")
+            // lock
         }
 
         override fun onScreenColor(screenColor: Screen) {
