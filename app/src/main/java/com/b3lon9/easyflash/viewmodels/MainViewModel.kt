@@ -48,8 +48,9 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val toggleRipple           = MutableLiveData<Drawable>()
     val baseLineFlashLightOn   = MutableLiveData<Drawable>()
     val baseLineFlashLightOff  = MutableLiveData<Drawable>()
-    val baseLineLock           = MutableLiveData<Drawable>()
     val baseLineMenu           = MutableLiveData<Drawable>()
+    val baseLineClose          = MutableLiveData<Drawable>()
+    val baseLineLock           = MutableLiveData<Drawable>()
     val switchImmediate        = MutableLiveData<Drawable>()
     val switchScreen           = MutableLiveData<Drawable>()
     val switchLock             = MutableLiveData<Drawable>()
@@ -81,6 +82,10 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         toggleRipple.postValue(ContextCompat.getDrawable(context, pref.getInt(::toggleRipple.name, R.drawable.toggle_ripple)))
         baseLineFlashLightOn.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOn.name, R.drawable.baseline_flashlight_on_24)))
         baseLineFlashLightOff.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineFlashLightOff.name, R.drawable.baseline_flashlight_off_24)))
+
+        baseLineMenu.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineMenu.name, R.drawable.menu_selector)))
+        baseLineClose.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineClose.name, R.drawable.close_selector)))
+        baseLineLock.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineLock.name, R.drawable.baseline_lock_24)))
 
         switchImmediate.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchImmediate.name, R.color.main_level1)))
         switchScreen.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchScreen.name, R.color.main_level2)))
@@ -317,10 +322,46 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
             }
 
             // menu
+            when(themeColor) {
+                Theme.BEIGE -> R.drawable.menu_selector_beige
+                Theme.NAVY -> R.drawable.menu_selector_navy
+                Theme.PINK -> R.drawable.menu_selector_pink
+                else -> R.drawable.menu_selector
+            }.let { id ->
+                baseLineMenu.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::baseLineMenu.name, id)
+                    apply()
+                }
+            }
 
             // close
+            when(themeColor) {
+                Theme.BEIGE -> R.drawable.close_selector_beige
+                Theme.NAVY -> R.drawable.close_selector_navy
+                Theme.PINK -> R.drawable.close_selector_pink
+                else -> R.drawable.close_selector
+            }.let { id ->
+                baseLineClose.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::baseLineClose.name, id)
+                    apply()
+                }
+            }
 
             // lock
+            when(themeColor) {
+                Theme.BEIGE -> R.drawable.baseline_lock_24_beige
+                Theme.NAVY -> R.drawable.baseline_lock_24_navy
+                Theme.PINK -> R.drawable.baseline_lock_24_pink
+                else -> R.drawable.baseline_lock_24
+            }.let { id ->
+                baseLineLock.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::baseLineLock.name, id)
+                    apply()
+                }
+            }
 
 
             // bottom menu

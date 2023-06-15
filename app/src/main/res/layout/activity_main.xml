@@ -48,7 +48,7 @@
                         android:id="@+id/menu_btn"
                         android:layout_width="@dimen/close_btn_size"
                         android:layout_height="@dimen/close_btn_size"
-                        android:background="@drawable/menu_selector"
+                        android:background="@{vm.baseLineMenu}"
                         android:onClickListener="@{() -> vm.onSettingDialog()}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -58,7 +58,7 @@
                         android:id="@+id/close_btn"
                         android:layout_width="@dimen/close_btn_size"
                         android:layout_height="@dimen/close_btn_size"
-                        android:background="@drawable/close_selector"
+                        android:background="@{vm.baseLineClose}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -119,7 +119,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:maxWidth="@dimen/flash_size"
-                        android:src="@{vm.isToggleChecked ? (vm.isSwitchLock ? @drawable/baseline_lock_24:@drawable/baseline_lock_open_24):@drawable/baseline_lock_open_24}"
+                        android:src="@{vm.isToggleChecked ? (vm.isSwitchLock ? vm.baseLineLock:@drawable/baseline_lock_open_24):@drawable/baseline_lock_open_24}"
                         android:visibility="@{vm.isToggleChecked ? (vm.isSwitchScreen ? View.GONE : vm.isSwitchLock ? View.VISIBLE : View.INVISIBLE) : View.INVISIBLE}"
                         android:onClickListener="@{() -> vm.lockGuide()}"/>
 
