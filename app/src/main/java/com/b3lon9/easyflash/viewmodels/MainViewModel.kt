@@ -265,6 +265,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     private val settingListener = object :SettingDialog.SettingDataListener {
         override fun onThemeColor(themeColor: Theme) {
             // init theme color
+            this@MainViewModel.themeColor = themeColor.ordinal
             editor.apply {
                 putInt("themeColor", themeColor.ordinal)
                 apply()

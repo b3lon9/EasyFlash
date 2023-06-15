@@ -23,4 +23,5 @@
     <!--setting-->
     <string name="setting_theme_color">테마색상</string>
     <string name="setting_screen_color">화면 조명 색상</string>
+    <string name="setting_apply">적용</string>
 </resources>

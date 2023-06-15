@@ -30,7 +30,6 @@
             <RadioGroup
                 android:id="@+id/theme_radio_group"
                 style="@style/DialogStyle"
-                android:onCheckedChanged="@{(radio, id) -> dialog.onThemeCheckedChanged(id)}"
                 android:orientation="horizontal">
 
                 <Space style="@style/SpaceStyle" />
@@ -109,8 +108,8 @@
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClickListener="@{() -> dialog.dismiss()}"
-                android:text="적용" />
+                android:onClickListener="@{() -> dialog.onApply()}"
+                android:text="@string/setting_apply" />
         </LinearLayout>
     </LinearLayout>
 

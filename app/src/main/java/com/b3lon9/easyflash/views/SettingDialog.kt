@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RadioGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
@@ -16,12 +18,12 @@ import com.b3lon9.easyflash.databinding.SettingDialogBinding
 import com.b3lon9.easyflash.viewmodels.MainViewModel
 import com.b3lon9.nlog.NLog
 
-class SettingDialog(private val context:Context, private val vm:MainViewModel) : Dialog(context), DialogInterface.OnDismissListener {
+class SettingDialog(private val context:Context, private val vm:MainViewModel) : Dialog(context) {
     private lateinit var binding:SettingDialogBinding
     private lateinit var listener:SettingDataListener
 
-    private var themeColor:Theme = Theme.values()[vm.themeColor]
-    private var screenColor:Screen = Screen.values()[vm.screenColor]
+    private lateinit var themeColor:Theme
+    private lateinit var screenColor:Screen
 
     interface SettingDataListener {
         fun onThemeColor(themeColor:Theme)
@@ -38,8 +40,15 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
 
         window?.setBackgroundDrawable(context.getDrawable(android.R.color.transparent))
 
-        setOnDismissListener(this)
+        // setOnDismissListener(this)
+    }
 
+    override fun onCreatePanelView(featureId: Int): View? {
+        return super.onCreatePanelView(featureId)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
 
         binding.themeRadioGroup.check(when(Theme.values()[vm.themeColor]) {
             Theme.BEIGE -> R.id.theme_radio_beige
@@ -55,10 +64,6 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
         })
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
     }
@@ -69,14 +74,9 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
         this.listener = listener
     }
 
-    fun onThemeCheckedChanged(@IdRes radioButtonId:Int) {
-        this.themeColor = when(radioButtonId) {
-            R.id.theme_radio_beige -> Theme.BEIGE
-            R.id.theme_radio_navy -> Theme.NAVY
-            R.id.theme_radio_pink -> Theme.PINK
-            else -> Theme.GREEN
-        }
-    }
+    /*fun onThemeCheckedChanged(@IdRes radioButtonId:Int) {
+            android:onCheckedChanged="@{(radio, id) -> dialog.onThemeCheckedChanged(id)}"
+    }*/
 
     fun onScreenCheckedChanged(@IdRes radioButtonId:Int) {
         this.screenColor = when(radioButtonId) {
@@ -86,9 +86,19 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
-        NLog.d("onDismiss... themeColor : $themeColor")
+    fun onApply() {
+        this.themeColor = when(binding.themeRadioGroup.checkedRadioButtonId) {
+            R.id.theme_radio_beige -> Theme.BEIGE
+            R.id.theme_radio_navy -> Theme.NAVY
+            R.id.theme_radio_pink -> Theme.PINK
+            else -> Theme.GREEN
+        }
+
         listener.onThemeColor(themeColor)
-        listener.onScreenColor(screenColor)
+        // listener.onScreenColor(screenColor)
+        dismiss()
     }
+    /*override fun onDismiss(dialog: DialogInterface?) {
+        NLog.d("onDismiss... themeColor : $themeColor")
+    }*/
 }
