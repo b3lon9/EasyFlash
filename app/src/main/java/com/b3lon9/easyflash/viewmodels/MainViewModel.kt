@@ -51,9 +51,11 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val baseLineMenu           = MutableLiveData<Drawable>()
     val baseLineClose          = MutableLiveData<Drawable>()
     val baseLineLock           = MutableLiveData<Drawable>()
+    val buttonRippleEffect     = MutableLiveData<Drawable>()
     val switchImmediate        = MutableLiveData<Drawable>()
     val switchScreen           = MutableLiveData<Drawable>()
     val switchLock             = MutableLiveData<Drawable>()
+    val switchTextColor        = MutableLiveData<Int>()
 
 
     var firstY = -1
@@ -86,10 +88,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         baseLineMenu.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineMenu.name, R.drawable.menu_selector)))
         baseLineClose.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineClose.name, R.drawable.close_selector)))
         baseLineLock.postValue(ContextCompat.getDrawable(context, pref.getInt(::baseLineLock.name, R.drawable.baseline_lock_24)))
+        buttonRippleEffect.postValue(ContextCompat.getDrawable(context, pref.getInt(::buttonRippleEffect.name, R.drawable.button_ripple_effect)))
 
         switchImmediate.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchImmediate.name, R.color.main_level1)))
         switchScreen.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchScreen.name, R.color.main_level2)))
         switchLock.postValue(ContextCompat.getDrawable(context, pref.getInt(::switchLock.name, R.color.main_level3)))
+        switchTextColor.value = pref.getInt(::switchTextColor.name, R.color.main_level4)
+
 
         try {
             val cameraIds = cameraManager.cameraIdList
@@ -363,6 +368,20 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 }
             }
 
+            // button
+            when(themeColor) {
+                Theme.BEIGE -> R.drawable.button_ripple_effect_beige
+                Theme.NAVY -> R.drawable.button_ripple_effect_navy
+                Theme.PINK -> R.drawable.button_ripple_effect_pink
+                else -> R.drawable.button_ripple_effect
+            }.let { id ->
+                buttonRippleEffect.postValue(ContextCompat.getDrawable(context, id))
+                editor.apply {
+                    putInt(::buttonRippleEffect.name, id)
+                    apply()
+                }
+            }
+
 
             // bottom menu
             when(themeColor) {
@@ -400,6 +419,21 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
                 switchLock.postValue(ContextCompat.getDrawable(context, id))
                 editor.apply {
                     putInt(::switchLock.name, id)
+                    apply()
+                }
+            }
+
+
+            // text Color
+            when(themeColor) {
+                Theme.BEIGE -> R.color.main_level4_beige
+                Theme.NAVY -> R.color.main_level4_navy
+                Theme.PINK -> R.color.main_level4_pink
+                else -> R.color.main_level4
+            }.let { id ->
+                switchTextColor.value = id
+                editor.apply {
+                    putInt(::switchTextColor.name, id)
                     apply()
                 }
             }
