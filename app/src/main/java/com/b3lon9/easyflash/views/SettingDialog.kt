@@ -23,6 +23,7 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
     interface SettingDataListener {
         fun onThemeColor(themeColor:Theme)
         fun onScreenColor(screenColor:Screen)
+        fun onKeepLight(keep:Boolean)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +58,8 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
             Screen.YELLOW -> R.id.screen_radio_yellow
             else -> R.id.screen_radio_white
         })
+
+        binding.keepCheckBox.isChecked = vm.isKeepLightChecked
     }
 
     override fun onDetachedFromWindow() {
@@ -91,6 +94,7 @@ class SettingDialog(private val context:Context, private val vm:MainViewModel) :
 
         listener.onThemeColor(themeColor)
         // listener.onScreenColor(screenColor)
+        listener.onKeepLight(binding.keepCheckBox.isChecked)
 
         dismiss()
     }

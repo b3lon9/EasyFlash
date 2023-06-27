@@ -104,8 +104,17 @@
                 <Space style="@style/SpaceStyle" />
             </RadioGroup>
 
+            <LinearLayout
+                style="@style/DialogStyle.CheckBox">
+                <CheckBox
+                    android:id="@+id/keepCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_keep" />
+            </LinearLayout>
+
             <Button
-                android:id="@+id/button"
+                android:id="@+id/applyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClickListener="@{() -> dialog.onApply()}"

@@ -41,6 +41,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
+    var isKeepLightChecked:Boolean = pref.getBoolean(context.resources.getString(R.string.setting_keep), false)
     var themeColor:Int = pref.getInt("themeColor", Theme.GREEN.ordinal)
     var screenColor:Int = pref.getInt("screenColor", Screen.WHITE.ordinal)
 
@@ -443,6 +444,13 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         override fun onScreenColor(screenColor: Screen) {
             editor.apply {
                 putInt("screenColor", screenColor.ordinal)
+                apply()
+            }
+        }
+
+        override fun onKeepLight(keep: Boolean) {
+            editor.apply {
+                putBoolean(context.resources.getString(R.string.setting_keep), keep)
                 apply()
             }
         }

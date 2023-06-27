@@ -23,5 +23,6 @@
     <!--setting-->
     <string name="setting_theme_color">テーマカラー</string>
     <string name="setting_screen_color">スクリーン フラッシュの色</string>
+    <string name="setting_keep">照明保持</string>
     <string name="setting_apply">適用</string>
 </resources>

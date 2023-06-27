@@ -24,5 +24,6 @@
     <!--setting-->
     <string name="setting_theme_color">Theme Color</string>
     <string name="setting_screen_color">Screen Flash Color</string>
+    <string name="setting_keep">keep the lights on</string>
     <string name="setting_apply">apply</string>
 </resources>
