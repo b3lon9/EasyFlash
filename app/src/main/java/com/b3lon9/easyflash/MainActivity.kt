@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        vm.pause()
+        if (!vm.isKeepLightChecked) vm.pause()
 
         myRef.apply {
             removeEventListener(eventListener)

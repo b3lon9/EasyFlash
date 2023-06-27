@@ -449,6 +449,8 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
         }
 
         override fun onKeepLight(keep: Boolean) {
+            isKeepLightChecked = keep
+
             editor.apply {
                 putBoolean(context.resources.getString(R.string.setting_keep), keep)
                 apply()
