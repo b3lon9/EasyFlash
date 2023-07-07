@@ -41,7 +41,7 @@ class MainViewModel(private val context: Context, private val pref: SharedPrefer
     val isSwitchScreen       = MutableLiveData(false)
     val isSwitchLock         = MutableLiveData(false)
 
-    var isKeepLightChecked:Boolean = pref.getBoolean(context.resources.getString(R.string.setting_keep), false)
+    var isKeepLightChecked:Boolean = pref.getBoolean(context.resources.getString(R.string.setting_keep), true)
     var themeColor:Int = pref.getInt("themeColor", Theme.GREEN.ordinal)
     var screenColor:Int = pref.getInt("screenColor", Screen.WHITE.ordinal)
 

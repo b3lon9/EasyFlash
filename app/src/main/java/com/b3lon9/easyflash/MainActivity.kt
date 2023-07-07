@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.closeBtn.setOnClickListener {
+            vm.pause()
             finish()
         }
 
